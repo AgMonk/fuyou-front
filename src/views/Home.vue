@@ -16,14 +16,19 @@ export default {
     HelloWorld
   },
   mounted() {
-    request({
-      url:"/User/login",
-      params:{
-        username:"administrator",
-        password:"123456",
-      }
-    }).then(res=>{
-      console.log(res)
+    // request({
+    //   url:"/User/login",
+    //   params:{
+    //     username:"administrator",
+    //     password:"123456",
+    //   }
+    // }).then(res=>{
+    //   console.log(res)
+    // })
+    console.log(1)
+    this.$store.dispatch("user/login",{
+      username:"administrator",
+      password:"123456",
     })
   }
 }
