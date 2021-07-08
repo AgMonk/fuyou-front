@@ -8,11 +8,23 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
+import {request} from "@/assets/js/request";
 
 export default {
   name: 'Home',
   components: {
     HelloWorld
+  },
+  mounted() {
+    request({
+      url:"/User/login",
+      params:{
+        username:"administrator",
+        password:"123456",
+      }
+    }).then(res=>{
+      console.log(res)
+    })
   }
 }
 </script>
