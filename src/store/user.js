@@ -17,8 +17,14 @@ export default {
         }).then(res => {
             state.user = res.data;
             ElMessage.success(res.message)
-        })
-        ,
+        }),
+        logout: ({dispatch, commit, state}) => request({
+            url: "/User/logout"
+        }).then(res => {
+            state.user =undefined;
+            ElMessage.success(res.message)
+        }),
+
         getStatus: ({dispatch, commit, state}) => {
             if (state.user) {
                 return new Promise(resolve => resolve(true))
