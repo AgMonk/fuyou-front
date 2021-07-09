@@ -21,6 +21,19 @@ export const routes = [
         path: '/about',
         name: '关于',
         component: () => import("../views/About"),
+        children:[
+            {
+                path: 'about1',
+                name: '关于1',
+                component: () => import("../components/test"),
+            },
+             {
+                path: 'about2',
+                name: '关于2',
+                component: () => import("../components/test"),
+            },
+
+        ]
     },
 ]
 
