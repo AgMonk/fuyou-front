@@ -1,10 +1,10 @@
 <!--suppress HtmlUnknownTag -->
 <template>
-  <el-submenu v-if="route.children" :index="path">
+  <el-submenu v-if="route.name&&route.children" :index="path">
     <template #title>{{ route.name }}</template>
     <my-navigation-item v-for="(child,i) in route.children" :key="i" :route="child" :parent-path="path"/>
   </el-submenu>
-  <el-menu-item v-else :index="path" >
+  <el-menu-item v-else-if="route.name" :index="path">
     {{ route.name }}
   </el-menu-item>
 </template>

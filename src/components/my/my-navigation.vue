@@ -9,7 +9,7 @@
       @select="select"
       router
       active-text-color="#ffd04b">
-  <my-navigation-item v-for="(route,i) in routes" :key="i" :route="route" parent-path="" />
+  <my-navigation-item v-for="(route,i) in routes" :key="i" :route="route" parent-path=""/>
   </el-menu>
 </template>
 

@@ -7,4 +7,7 @@ import ElementPlus from 'element-plus';
 import 'element-plus/lib/theme-chalk/index.css';
 import './assets/js/utils'
 
-createApp(App).use(store).use(ElementPlus).use(router).mount('#app')
+import locale from 'element-plus/lib/locale/lang/zh-cn'
+import 'dayjs/locale/zh-cn'
+
+createApp(App).use(store).use(ElementPlus, {locale}).use(router).mount('#app')

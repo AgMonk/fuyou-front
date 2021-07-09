@@ -1,17 +1,18 @@
 import {createRouter, createWebHistory} from 'vue-router'
-import Home from '../views/Home.vue'
 import store from '../store'
 import {ElMessage} from "element-plus";
-
-let debug = true;
 
 const routeNameMe = "我的";
 
 export const routes = [
     {
         path: '/',
-        name: '主页',
-        component: Home,
+        redirect: "/record"
+    },
+    {
+        path: '/record',
+        name: '档案',
+        component: () => import("../views/Record"),
     },
     {
         path: "/me",
