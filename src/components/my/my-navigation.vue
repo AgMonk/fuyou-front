@@ -1,7 +1,7 @@
 <!--suppress HtmlUnknownTag -->
 <template>
   <el-menu
-      :default-active="activeIndex"
+      :default-active.sync="activeIndex"
       class="el-menu-demo"
       mode="horizontal"
       background-color="#545c64"
@@ -15,7 +15,8 @@
 
 <script>
 import {routes} from "@/router";
-import MyNavigationItem from "@/components/my-navigation-item";
+import MyNavigationItem from "@/components/my/my-navigation-item";
+import {mapState} from "vuex";
 
 export default {
   name: "my-navigation",
@@ -23,13 +24,19 @@ export default {
   data() {
     return {
       routes,
-      activeIndex:undefined,
+      activeIndex:"/me",
     }
+  },
+  computed: {
+    ...mapState({
+      user: state => state.user.user,
+    })
   },
   methods: {
     select(index,indexPath){
-      console.log(index)
-      console.log(indexPath)
+     // if(!this.user){
+     //   this.activeIndex = "/me"
+     // }
     }
   },
   mounted() {

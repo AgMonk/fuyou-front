@@ -26,7 +26,7 @@
 }
 </style>
 <script>
-import MyNavigation from "@/components/my-navigation";
+import MyNavigation from "@/components/my/my-navigation";
 
 export default {
   components: {MyNavigation}
