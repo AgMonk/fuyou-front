@@ -1,4 +1,5 @@
 // 获取对象类型
+
 let getTypeOf = function (obj) {
     let type = Object.prototype.toString.call(obj);
     return type.replace("[object ", "").replace("]", "");
@@ -62,7 +63,7 @@ console.slf4j = function (template, ...data) {
 String.prototype.format = function (...data) {
     return format(this, ...data)
 }
-console.clear()
+// console.clear()
 
 export const copyObj = (obj) => JSON.parse(JSON.stringify(obj))
 
@@ -125,4 +126,10 @@ export const insertTextToTextarea = (
     textarea.focus();
     let index = t1.length +t2.length + startText.length;
     setTextareaSelection(textarea, index);
+}
+
+export const debugLog = (debug,...params)=>{
+    if (debug){
+        console.log(...params)
+    }
 }

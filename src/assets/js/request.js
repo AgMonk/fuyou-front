@@ -9,10 +9,11 @@ export const request = axios.create({
 })
 
 request.interceptors.response.use(response => {
+    // return response.data
     let data = response.data;
     if (data.code === 2000) {
         return data
     }
-    ElMessage.warning(data.message);
+    // ElMessage.error(data.message);
     throw data.message;
 }, (error) => Promise.reject(error));
