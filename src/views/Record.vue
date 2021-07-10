@@ -9,28 +9,41 @@
       <el-table :data="myRecord" stripe>
         <el-table-column label="详情" type="expand">
           <template #default="props">
+            <el-form inline>
+              <el-form-item label="入院日期">{{ props.row.regDate.date }}</el-form-item>
+              <el-form-item label="出院日期">{{ props.row.leaveHospital.date }}</el-form-item>
+            </el-form>
+            <el-form inline>
+              <el-form-item label="主管医生">{{ props.row.doctorInCharge }}</el-form-item>
+              <el-form-item label="病史">{{ props.row.medicalHistory }}</el-form-item>
+            </el-form>
             <el-form v-if="props.row.contactName" inline>
               <el-form-item label="联系人">{{ props.row.contactName }}</el-form-item>
               <el-form-item label="联系人电话">{{ props.row.contactPhone }}</el-form-item>
-            </el-form>
-            <el-form inline>
-              <el-form-item label="病史">{{ props.row.medicalHistory }}</el-form-item>
             </el-form>
 
           </template>
         </el-table-column>
         <el-table-column label="住院号" prop="uuid"/>
         <el-table-column label="姓名" prop="patientName"/>
-        <el-table-column label="主管医生" prop="doctorInCharge"/>
         <el-table-column label="性别" prop="gender" width="60px"/>
         <el-table-column label="出生日期" prop="birthday.month"/>
-        <el-table-column label="入院日期" prop="regDate.date"/>
-        <el-table-column label="出院日期" prop="leaveHospital.date"/>
+        <!--        <el-table-column label="主管医生" prop="doctorInCharge"/>-->
+        <!--        <el-table-column label="入院日期" prop="regDate.date"/>-->
+        <!--        <el-table-column label="出院日期" prop="leaveHospital.date"/>-->
         <el-table-column label="电话" prop="phone"/>
         <el-table-column label="上次通知" prop="lastNotice.date"/>
         <el-table-column label="下次复查" prop="nextReview.date"/>
         <el-table-column label="复查间隔（天）" prop="reviewInterval"/>
         <el-table-column label="复查状态" prop="reviewStatus"/>
+        <el-table-column label="操作">
+          <template #default="props">
+            <my-button v-if="props.row.reviewStatus==='未通知'" text="通知" @click="functionNotImplement"/>
+            <my-button v-if="props.row.reviewStatus==='已通知'" text="签到" @click="functionNotImplement"/>
+            <my-button v-if="props.row.reviewStatus==='无需通知'" text="启动随访" @click="functionNotImplement"/>
+            <my-button v-if="props.row.reviewStatus!=='无需通知'" text="结束随访" type="danger" @click="functionNotImplement"/>
+          </template>
+        </el-table-column>
 
       </el-table>
 
@@ -48,6 +61,7 @@
 import RecordForm from "@/components/form/record-form";
 import MyButton from "@/components/my/my-button";
 import {mapState} from "vuex";
+import {functionNotImplement} from "@/assets/js/utils";
 
 export default {
   name: "Record",
@@ -73,6 +87,7 @@ export default {
     })
   },
   methods: {
+    functionNotImplement,
     submit(e) {
       this.$store.dispatch("record/add", e).then(res => {
         this.dialogShow = false;
