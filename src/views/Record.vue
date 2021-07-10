@@ -6,6 +6,15 @@
       <my-button text="添加" @click="dialogShow=true"/>
     </el-header>
     <el-main>
+      <el-pagination
+          :current-page="params.page.page"
+          :page-size="params.page.size"
+          :page-sizes="[10, 20, 50, 100]"
+          :total="total"
+          layout="total, sizes, prev, pager, next, jumper"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange">
+      </el-pagination>
       <el-table :data="myRecord" stripe>
         <el-table-column label="详情" type="expand">
           <template #default="props">
@@ -37,9 +46,6 @@
         <el-table-column label="姓名" prop="patientName"/>
         <el-table-column label="性别" prop="gender" width="60px"/>
         <el-table-column label="出生日期" prop="birthday.month"/>
-        <!--        <el-table-column label="主管医生" prop="doctorInCharge"/>-->
-        <!--        <el-table-column label="入院日期" prop="regDate.date"/>-->
-        <!--        <el-table-column label="出院日期" prop="leaveHospital.date"/>-->
         <el-table-column label="电话" prop="phone"/>
         <el-table-column label="上次通知" prop="lastNotice.date"/>
         <el-table-column label="下次复查" prop="nextReview.date"/>
@@ -112,7 +118,7 @@ export default {
       params: {
         page: {
           page: 1,
-          size: 20,
+          size: 10,
         },
         startReview: {
           uuid: 0,
@@ -120,7 +126,6 @@ export default {
           reviewInterval: 0,
         }
       },
-
       myRecord: [],
       total: 0,
     }
@@ -132,6 +137,16 @@ export default {
     })
   },
   methods: {
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+      this.params.page.size = val;
+      this.page()
+    },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+      this.params.page.page = val;
+      this.page()
+    },
     functionNotImplement,
     sign(uuid) {
       this.$store.dispatch("record/sign", uuid).then(res => {
