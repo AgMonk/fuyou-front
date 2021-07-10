@@ -6,6 +6,36 @@
       <my-button text="添加" @click="dialogShow=true"/>
     </el-header>
     <el-main>
+      <el-form inline label-width="100px" size="small">
+        <el-form-item label="住院号">
+          <el-input v-model="params.page.condition.uuid" placeholder="住院号" @change="page"/>
+        </el-form-item>
+        <el-form-item label="患者姓名">
+          <el-input v-model="params.page.condition.patientName" placeholder="患者姓名" @change="page"/>
+        </el-form-item>
+        <el-form-item label="主管医生">
+          <el-input v-model="params.page.condition.doctorInCharge" placeholder="主管医生" @change="page"/>
+        </el-form-item>
+        <el-form-item label="下次复诊">
+          <el-date-picker
+              v-model="params.page.condition.nextReview.timestamp"
+              format="YYYY 年 MM 月 DD 日"
+              placeholder="选择日期"
+              type="date"
+              value-format="X"
+              @change="page">
+          </el-date-picker>
+        </el-form-item>
+        <el-form-item label="复查状态">
+          <el-select v-model="params.page.condition.reviewStatus" placeholder="复查状态" style="width:100%" @change="page">
+            <el-option label="不选择" value=""/>
+            <el-option value="无需通知"/>
+            <el-option value="未通知"/>
+            <el-option value="已通知"/>
+          </el-select>
+        </el-form-item>
+      </el-form>
+
       <el-pagination
           :current-page="params.page.page"
           :page-size="params.page.size"
@@ -126,6 +156,13 @@ export default {
         page: {
           page: 1,
           size: 10,
+          condition: {
+            uuid: undefined,
+            patientName: undefined,
+            doctorInCharge: undefined,
+            reviewStatus: "未通知",
+            nextReview: {timestamp: "" + Math.floor(new Date().getTime() / 1000 + 60 * 60 * 24 * 30)},
+          }
         },
         startReview: {
           uuid: 0,
@@ -192,7 +229,7 @@ export default {
       }
     },
     submit(e) {
-      this.$store.dispatch("record/add", e).then(res => {
+      this.$store.dispatch("record/add", e).then(() => {
         this.dialogShow = false;
         this.importData = undefined;
         this.page();

@@ -20,8 +20,7 @@ export default {
       required: true,
     },
     phoneNumber: {
-      type: Number,
-      required: true,
+      type: String,
     }
   },
 }
