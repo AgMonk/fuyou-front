@@ -33,6 +33,11 @@ export default {
             }
             return dispatch("page", data)
         },
+        //启动随访
+        startReview: ({dispatch, commit, state}, {uuid, nextReview, reviewInterval}) => request({
+            url: "/Record/startReview",
+            params: {uuid, nextReview, reviewInterval},
+        }),
         method: ({dispatch, commit, state}, payload) => {
 
         },

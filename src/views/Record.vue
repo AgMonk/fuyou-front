@@ -17,11 +17,16 @@
               <el-form-item label="主管医生">{{ props.row.doctorInCharge }}</el-form-item>
               <el-form-item label="病史">{{ props.row.medicalHistory }}</el-form-item>
             </el-form>
+            <el-form inline>
+              <el-form-item label="上次通知">{{ props.row.lastNotice.timeString }}</el-form-item>
+              <!--              <el-form-item label="上次签到">{{ props.row.lastSignIn.timeString }}</el-form-item>-->
+            </el-form>
             <el-form v-if="props.row.contactName" inline>
               <el-form-item label="联系人">{{ props.row.contactName }}</el-form-item>
               <el-form-item label="联系人电话">{{ props.row.contactPhone }}</el-form-item>
             </el-form>
 
+            <my-button v-if="props.row.reviewStatus!=='无需通知'" text="结束随访" type="danger" @click="functionNotImplement"/>
           </template>
         </el-table-column>
         <el-table-column label="住院号" prop="uuid"/>
@@ -40,8 +45,7 @@
           <template #default="props">
             <my-button v-if="props.row.reviewStatus==='未通知'" text="通知" @click="functionNotImplement"/>
             <my-button v-if="props.row.reviewStatus==='已通知'" text="签到" @click="functionNotImplement"/>
-            <my-button v-if="props.row.reviewStatus==='无需通知'" text="启动随访" @click="functionNotImplement"/>
-            <my-button v-if="props.row.reviewStatus!=='无需通知'" text="结束随访" type="danger" @click="functionNotImplement"/>
+            <my-button v-if="props.row.reviewStatus==='无需通知'" text="启动随访" @click="startReview(props.row);startReviewShow=true;"/>
           </template>
         </el-table-column>
 
@@ -51,6 +55,35 @@
       <el-dialog v-model="dialogShow" title="添加" width="80%">
         <record-form @submit="submit"/>
       </el-dialog>
+      <el-dialog v-model="startReviewShow" title="添加" width="60%">
+        <el-form inline label-width="120px">
+          <el-form-item label="住院号">
+            {{ params.startReview.uuid }}
+          </el-form-item>
+          <el-form-item label="姓名">
+            {{ params.startReview.patientName }}
+          </el-form-item>
+
+          <el-form-item label="下次复查">
+            <el-date-picker
+                v-model="params.startReview.nextReview"
+                format="YYYY 年 MM 月 DD 日"
+                placeholder="下次复查"
+                type="date">
+            </el-date-picker>
+          </el-form-item>
+          <el-form-item label="复查间隔（天）">
+            <el-input v-model="params.startReview.reviewInterval"/>
+          </el-form-item>
+
+        </el-form>
+        <el-form>
+          <el-form-item>
+            <my-button text="确认" @click="startReview(false)"/>
+          </el-form-item>
+        </el-form>
+      </el-dialog>
+
     </el-main>
     <el-footer></el-footer>
   </el-container>
@@ -69,12 +102,18 @@ export default {
   data() {
     return {
       dialogShow: false,
+      startReviewShow: false,
       importData: undefined,
       params: {
         page: {
           page: 1,
           size: 20,
         },
+        startReview: {
+          uuid: 0,
+          nextReview: 0,
+          reviewInterval: 0,
+        }
       },
 
       myRecord: [],
@@ -88,19 +127,44 @@ export default {
   },
   methods: {
     functionNotImplement,
+    startReview(record) {
+      let params = this.params.startReview;
+      //复制参数
+      if (record) {
+        let today = new Date();
+        today.setHours(0, 0, 0, 0);
+        let day = 1000 * 60 * 60 * 24 * record.reviewInterval;
+        params.uuid = record.uuid;
+        params.patientName = record.patientName;
+        params.nextReview = new Date(today.getTime() + day);
+        params.reviewInterval = record.reviewInterval;
+      } else {
+        params = Object.assign({}, params)
+        params.nextReview = params.nextReview.getTime() / 1000;
+        // 发送请求
+        this.$store.dispatch("record/startReview", params).then(res => {
+          this.$message.success(res.message)
+          this.startReviewShow = false;
+          this.page();
+        })
+      }
+    },
     submit(e) {
       this.$store.dispatch("record/add", e).then(res => {
         this.dialogShow = false;
         this.importData = undefined;
-        this.$store.dispatch("record/page", this.params.page).then(res => {
-          this.myRecord = res.records
-          this.total = res.total
-        })
+        this.page();
 
       }).catch(err => {
         if (err) {
           this.$message.error(err.join("\n"))
         }
+      })
+    },
+    page() {
+      this.$store.dispatch("record/page", this.params.page).then(res => {
+        this.myRecord = res.records
+        this.total = res.total
       })
     },
     getRecord() {
