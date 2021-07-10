@@ -11,22 +11,26 @@
           <template #default="props">
             <el-form inline>
               <el-form-item label="入院日期">{{ props.row.regDate.date }}</el-form-item>
-              <el-form-item label="出院日期">{{ props.row.leaveHospital.date }}</el-form-item>
+              <el-form-item v-if="props.row.leaveHospital" label="出院日期">{{ props.row.leaveHospital.date }}</el-form-item>
             </el-form>
             <el-form inline>
               <el-form-item label="主管医生">{{ props.row.doctorInCharge }}</el-form-item>
               <el-form-item label="病史">{{ props.row.medicalHistory }}</el-form-item>
             </el-form>
             <el-form inline>
-              <el-form-item label="上次通知">{{ props.row.lastNotice.timeString }}</el-form-item>
-              <!--              <el-form-item label="上次签到">{{ props.row.lastSignIn.timeString }}</el-form-item>-->
+              <el-form-item v-if="props.row.lastNotice" label="上次通知">{{ props.row.lastNotice.timeString }}</el-form-item>
+              <el-form-item v-if="props.row.lastSignIn" label="上次签到">{{ props.row.lastSignIn.timeString }}</el-form-item>
             </el-form>
             <el-form v-if="props.row.contactName" inline>
               <el-form-item label="联系人">{{ props.row.contactName }}</el-form-item>
               <el-form-item label="联系人电话">{{ props.row.contactPhone }}</el-form-item>
             </el-form>
+            <el-form inline>
+              <el-form-item label="入档时间">{{ props.row.recordTimestamp.timeString }}</el-form-item>
+            </el-form>
 
             <my-button v-if="props.row.reviewStatus!=='无需通知'" text="结束随访" type="danger" @click="functionNotImplement"/>
+            <my-button text="删除" type="danger" @click="del(props.row.uuid)"/>
           </template>
         </el-table-column>
         <el-table-column label="住院号" prop="uuid"/>
@@ -43,8 +47,9 @@
         <el-table-column label="复查状态" prop="reviewStatus"/>
         <el-table-column label="操作">
           <template #default="props">
-            <my-button v-if="props.row.reviewStatus==='未通知'" text="通知" @click="functionNotImplement"/>
-            <my-button v-if="props.row.reviewStatus==='已通知'" text="签到" @click="functionNotImplement"/>
+            <my-button v-if="props.row.reviewStatus==='未通知'" text="通知" tooltip="电话通知后点击" @click="functionNotImplement"/>
+            <my-button v-if="props.row.reviewStatus==='已通知'" text="签到" tooltip="签到后下次复查时间为：当前日期+复查间隔"
+                       @click="sign(props.row.uuid)"/>
             <my-button v-if="props.row.reviewStatus==='无需通知'" text="启动随访" @click="startReview(props.row);startReviewShow=true;"/>
           </template>
         </el-table-column>
@@ -120,6 +125,7 @@ export default {
       total: 0,
     }
   },
+  emits: ["click"],
   computed: {
     ...mapState({
       records: state => state.record.data
@@ -127,6 +133,20 @@ export default {
   },
   methods: {
     functionNotImplement,
+    sign(uuid) {
+      this.$store.dispatch("record/sign", uuid).then(res => {
+        this.$message.success(res.message)
+        this.page();
+      })
+    },
+    del(uuid) {
+      if (confirm("删除档案？")) {
+        this.$store.dispatch("record/del", uuid).then(res => {
+          this.$message.success(res.message)
+          this.page();
+        })
+      }
+    },
     startReview(record) {
       let params = this.params.startReview;
       //复制参数

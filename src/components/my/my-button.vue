@@ -1,6 +1,10 @@
+<!--suppress HtmlUnknownTag -->
 <template>
-  <!--suppress HtmlUnknownTag -->
-  <el-button :type="type" :size="size" >{{ text }}</el-button>
+  <el-tooltip v-if="tooltip" :content="tooltip" effect="dark" placement="bottom">
+    <el-button :size="size" :type="type" @click="$emit(`click`,$event)">{{ text }}</el-button>
+  </el-tooltip>
+  <el-button v-else :size="size" :type="type" @click="$emit(`click`,$event)">{{ text }}</el-button>
+
 </template>
 
 <script>
@@ -11,26 +15,24 @@ export default {
       myData: {}
     }
   },
-  methods: {
-    copy(obj) {
-      this.myData = obj ? copyObj(obj) : [];
-    }
-  },
+  emits: ["click"],
   mounted() {
-    this.copy(this.data)
   },
   props: {
-    type:{
-      type:String,
-      default:"primary"
+    type: {
+      type: String,
+      default: "primary"
     },
-    size:{
-      type:String,
-      default:"medium"
+    size: {
+      type: String,
+      default: "medium"
     },
-    text:{
-      required:true,
-      type:String,
+    text: {
+      required: true,
+      type: String,
+    },
+    tooltip: {
+      type: String,
     },
 
   },

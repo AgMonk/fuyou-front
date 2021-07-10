@@ -38,6 +38,16 @@ export default {
             url: "/Record/startReview",
             params: {uuid, nextReview, reviewInterval},
         }),
+        //签到
+        sign: ({dispatch, commit, sign}, uuid) => request({
+            url: "/Record/sign",
+            params: {uuid},
+        }),
+        //删除
+        del: ({dispatch, commit, sign}, uuid) => request({
+            url: "/Record/del",
+            params: {uuid},
+        }),
         method: ({dispatch, commit, state}, payload) => {
 
         },

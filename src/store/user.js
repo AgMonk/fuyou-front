@@ -37,7 +37,7 @@ export default {
                     state.user = res.data;
                     state.timestamp = res.timestamp
                     return true;
-                }).catch(() => {
+                }).catch((err) => {
                     state.user = undefined;
                     state.timestamp = now
                 })

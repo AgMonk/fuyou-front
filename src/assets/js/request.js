@@ -16,4 +16,8 @@ request.interceptors.response.use(response => {
     }
     ElMessage.error(data.message);
     throw data.data;
-}, (error) => Promise.reject(error));
+}, (error) => {
+    console.error(error)
+    ElMessage.error(error.message);
+    return Promise.reject(error)
+});
