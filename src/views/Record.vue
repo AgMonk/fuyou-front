@@ -6,14 +6,27 @@
       <my-button text="添加" @click="dialogShow=true"/>
     </el-header>
     <el-main>
-      <el-table :data="myRecord">
+      <el-table :data="myRecord" stripe>
+        <el-table-column label="详情" type="expand">
+          <template #default="props">
+            <el-form v-if="props.row.contactName" inline>
+              <el-form-item label="联系人">{{ props.row.contactName }}</el-form-item>
+              <el-form-item label="联系人电话">{{ props.row.contactPhone }}</el-form-item>
+            </el-form>
+            <el-form inline>
+              <el-form-item label="病史">{{ props.row.medicalHistory }}</el-form-item>
+            </el-form>
+
+          </template>
+        </el-table-column>
         <el-table-column label="住院号" prop="uuid"/>
         <el-table-column label="姓名" prop="patientName"/>
         <el-table-column label="主管医生" prop="doctorInCharge"/>
-        <el-table-column label="性别" prop="gender"/>
+        <el-table-column label="性别" prop="gender" width="60px"/>
         <el-table-column label="出生日期" prop="birthday.month"/>
         <el-table-column label="入院日期" prop="regDate.date"/>
         <el-table-column label="出院日期" prop="leaveHospital.date"/>
+        <el-table-column label="电话" prop="phone"/>
         <el-table-column label="上次通知" prop="lastNotice.date"/>
         <el-table-column label="下次复查" prop="nextReview.date"/>
         <el-table-column label="复查间隔（天）" prop="reviewInterval"/>
@@ -79,6 +92,7 @@ export default {
       this.$store.dispatch("record/get", this.params.page).then(res => {
         this.myRecord = res.records
         this.total = res.total
+        console.log(this.myRecord)
       })
     }
   },
