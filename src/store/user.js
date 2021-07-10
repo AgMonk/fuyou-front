@@ -8,6 +8,7 @@ export default {
     namespaced: true,
     state: {
         user: undefined,
+        timestamp: 0,
     },
     mutations: {},
     actions: {
@@ -26,14 +27,19 @@ export default {
         }),
 
         getStatus: ({dispatch, commit, state}) => {
-            if (state.user) {
+            let now = new Date().getTime()
+            if (state.user && (now - state.timestamp) < 30 * 1000) {
                 return new Promise(resolve => resolve(true))
-            }else{
+            } else {
                 return request({
                     url: "/User/status",
                 }).then(res => {
                     state.user = res.data;
+                    state.timestamp = res.timestamp
                     return true;
+                }).catch(() => {
+                    state.user = undefined;
+                    state.timestamp = now
                 })
             }
         },

@@ -28,7 +28,7 @@
           v-model="data.birthday"
           format="YYYY 年 MM 月"
           placeholder="出生日期"
-          type="date">
+          type="month">
       </el-date-picker>
     </el-form-item>
   </el-form>
@@ -81,6 +81,7 @@
 
     <el-form-item label-width="0">
       <my-button text="提交" @click="submit"/>
+      <my-button text="重置" type="danger" @click="reset"/>
     </el-form-item>
   </el-form>
 </template>
@@ -89,32 +90,40 @@
 import {copyObj} from "@/assets/js/utils";
 import MyButton from "@/components/my/my-button";
 
+let defaultData = {
+  uuid: "",
+  patientName: "",
+  doctorInCharge: "",
+  phone: "",
+  gender: "女",
+  medicalHistory: "",
+  birthday: undefined,
+  regDate: new Date(),
+  contactName: "",
+  contactPhone: "",
+
+  //  复查相关字段
+  reviewStatus: "无需通知",
+  leaveHospital: undefined,
+  reviewInterval: 7,
+}
+
 export default {
   name: "record-form",
   components: {MyButton},
   data() {
     return {
-      data: {
-        uuid: "",
-        patientName: "",
-        doctorInCharge: "",
-        phone: "",
-        gender: "女",
-        medicalHistory: "",
-        birthday: undefined,
-        regDate: new Date(),
-        contactName: "",
-        contactPhone: "",
-
-        //  复查相关字段
-        reviewStatus: "无需通知",
-        leaveHospital: undefined,
-        reviewInterval: 7,
-      }
+      data: defaultData
     }
   },
   emits: ["submit"],
   methods: {
+    reset() {
+      if (confirm("重置数据？")) {
+        let o = this.importData ? this.importData : defaultData
+        this.sync(o)
+      }
+    },
     submit() {
       let data = Object.assign({}, this.data)
       let date2Time = (data, field) => {
@@ -126,19 +135,26 @@ export default {
       this.$emit("submit", data);
       // this.$emit("submit",this.data);
     },
+    sync(e) {
+      if (!e) {
+        this.data = copyObj(defaultData)
+        return;
+      }
+      this.data = copyObj(e)
+      let time2Date = (data, field) => {
+        data[field] = new Date(data[field].timestamp * 1000)
+      }
+      time2Date(this.data, "birthday")
+      time2Date(this.data, "regDate")
+      time2Date(this.data, "leaveHospital")
+    }
   },
   mounted() {
   },
   watch: {
     "importData": {
-      handler: (e) => {
-        this.data = copyObj(e)
-        let time2Date = (data, field) => {
-          data[field] = new Date(data[field].timestamp * 1000)
-        }
-        time2Date(this.data, "birthday")
-        time2Date(this.data, "regDate")
-        time2Date(this.data, "leaveHospital")
+      handler: function (e) {
+        this.sync(e)
       }
     }
   },

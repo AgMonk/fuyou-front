@@ -15,11 +15,13 @@ export default {
             data
         }).then(res => {
             state.data[JSON.stringify(data)] = res;
+            return res.data
         }),
         add: ({dispatch, commit, state}, data) => request({
             url: "/Record/add",
             data
         }).then(res => {
+            delete state.data[JSON.stringify(data)]
             ElMessage.success(res.message);
         }),
         //优先经过缓存查询
@@ -27,7 +29,7 @@ export default {
             let d = state.data[JSON.stringify(data)];
             let now = new Date().getTime();
             if (d && now - d.timestamp < 1000 * 60 * 3) {
-                return new Promise(r => r(d))
+                return new Promise(r => r(d.data))
             }
             return dispatch("page", data)
         },
