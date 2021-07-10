@@ -160,8 +160,8 @@ export default {
             uuid: undefined,
             patientName: undefined,
             doctorInCharge: undefined,
-            reviewStatus: "未通知",
-            nextReview: {timestamp: "" + Math.floor(new Date().getTime() / 1000 + 60 * 60 * 24 * 30)},
+            reviewStatus: "",
+            nextReview: {timestamp: null},
           }
         },
         startReview: {
