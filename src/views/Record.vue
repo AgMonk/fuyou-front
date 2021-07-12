@@ -89,7 +89,7 @@
         </el-table-column>
         <el-table-column label="操作">
           <template #default="props">
-            <my-button v-if="props.row.reviewStatus==='未通知'" text="通知" tooltip="电话通知后点击" @click="functionNotImplement"/>
+            <my-button v-if="props.row.reviewStatus==='未通知'" text="通知" tooltip="电话通知后点击" @click="notice(props.row.uuid)"/>
             <my-button v-if="props.row.reviewStatus==='已通知'" text="签到" tooltip="签到后下次复查时间为：当前日期+复查间隔"
                        @click="sign(props.row.uuid)"/>
             <my-button v-if="props.row.reviewStatus==='无需通知'" text="启动随访" @click="startReview(props.row);startReviewShow=true;"/>
@@ -191,13 +191,19 @@ export default {
       this.params.page.page = val;
       this.page()
     },
-    functionNotImplement,
     sign(uuid) {
       this.$store.dispatch("record/sign", uuid).then(res => {
         this.$message.success(res.message)
         this.page();
       })
     },
+    notice(uuid) {
+      this.$store.dispatch("record/notice", uuid).then(res => {
+        this.$message.success(res.message)
+        this.page();
+      })
+    },
+    functionNotImplement,
     del(uuid) {
       if (confirm("删除档案？")) {
         this.$store.dispatch("record/del", uuid).then(res => {

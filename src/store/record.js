@@ -48,6 +48,11 @@ export default {
             url: "/Record/del",
             params: {uuid},
         }),
+        //通知
+        notice: ({dispatch, commit, sign}, uuid) => request({
+            url: "/Record/notice",
+            params: {uuid},
+        }),
         method: ({dispatch, commit, state}, payload) => {
 
         },
