@@ -28,6 +28,14 @@
         <el-descriptions-item v-if="record.contactName" label="联系人电话">{{ record.contactPhone }}</el-descriptions-item>
         <el-descriptions-item label="病史">{{ record.medicalHistory }}</el-descriptions-item>
       </el-descriptions>
+
+      <el-tabs v-model="activeName" type="card">
+        <el-tab-pane label="手术情况" name="手术情况">
+          <operation :record-uuid="uuid"/>
+        </el-tab-pane>
+        <el-tab-pane label="复诊记录" name="复诊记录">复诊记录</el-tab-pane>
+      </el-tabs>
+
     </el-main>
     <el-footer></el-footer>
   </el-container>
@@ -35,10 +43,14 @@
 </template>
 
 <script>
+import Operation from "@/views/details/Operation";
+
 export default {
   name: "Details",
+  components: {Operation},
   data() {
     return {
+      activeName: "手术情况",
       uuid: this.$route.params.uuid,
       record: {},
     }
