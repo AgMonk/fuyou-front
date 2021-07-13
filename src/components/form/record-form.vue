@@ -105,7 +105,7 @@ let defaultData = {
   //  复查相关字段
   reviewStatus: "无需通知",
   leaveHospital: undefined,
-  reviewInterval: 7,
+  reviewInterval: 15,
 }
 
 export default {

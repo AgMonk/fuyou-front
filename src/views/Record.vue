@@ -239,7 +239,6 @@ export default {
       if (confirm("结束随访？")) {
         this.$store.dispatch("record/stopReview", uuid).then(res => {
           this.$message.success(res.message)
-          this.startReviewShow = false;
           this.page();
         })
       }
