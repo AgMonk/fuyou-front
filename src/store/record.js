@@ -38,6 +38,11 @@ export default {
             url: "/Record/startReview",
             params: {uuid, nextReview, reviewInterval},
         }),
+        //结束随访
+        stopReview: ({dispatch, commit, state}, uuid) => request({
+            url: "/Record/stopReview",
+            params: {uuid},
+        }),
         //签到
         sign: ({dispatch, commit, sign}, uuid) => request({
             url: "/Record/sign",

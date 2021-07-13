@@ -7,6 +7,7 @@
     </el-header>
     <el-main>
       <el-form inline label-width="100px" size="small">
+        <h4>过滤条件</h4>
         <el-form-item label="住院号">
           <el-input v-model="params.page.condition.uuid" placeholder="住院号" @change="page"/>
         </el-form-item>
@@ -70,7 +71,7 @@
               <el-form-item label="入档时间">{{ props.row.recordTimestamp.timeString }}</el-form-item>
             </el-form>
 
-            <my-button v-if="props.row.reviewStatus!=='无需通知'" text="结束随访" type="danger" @click="functionNotImplement"/>
+            <my-button v-if="props.row.reviewStatus!=='无需通知'" text="结束随访" type="danger" @click="stopReview(props.row.uuid)"/>
             <my-button text="删除" type="danger" @click="del(props.row.uuid)"/>
           </template>
         </el-table-column>
@@ -181,6 +182,7 @@ export default {
     })
   },
   methods: {
+    functionNotImplement,
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
       this.params.page.size = val;
@@ -203,7 +205,6 @@ export default {
         this.page();
       })
     },
-    functionNotImplement,
     del(uuid) {
       if (confirm("删除档案？")) {
         this.$store.dispatch("record/del", uuid).then(res => {
@@ -228,6 +229,15 @@ export default {
         params.nextReview = params.nextReview.getTime() / 1000;
         // 发送请求
         this.$store.dispatch("record/startReview", params).then(res => {
+          this.$message.success(res.message)
+          this.startReviewShow = false;
+          this.page();
+        })
+      }
+    },
+    stopReview(uuid) {
+      if (confirm("结束随访？")) {
+        this.$store.dispatch("record/stopReview", uuid).then(res => {
           this.$message.success(res.message)
           this.startReviewShow = false;
           this.page();
