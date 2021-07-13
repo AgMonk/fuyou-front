@@ -15,6 +15,11 @@ export const routes = [
         component: () => import("../views/Record"),
     },
     {
+        path: '/detail/:uuid',
+        comment: '详情',
+        component: () => import("../views/Details"),
+    },
+    {
         path: "/me",
         name: routeNameMe,
         component: () => import("../views/Me"),

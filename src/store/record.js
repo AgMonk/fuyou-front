@@ -24,15 +24,15 @@ export default {
             delete state.data[JSON.stringify(data)]
             ElMessage.success(res.message);
         }),
-        //优先经过缓存查询
-        get: ({dispatch, commit, state}, data) => {
-            let d = state.data[JSON.stringify(data)];
-            let now = new Date().getTime();
-            if (d && now - d.timestamp < 1000 * 60 * 3) {
-                return new Promise(r => r(d.data))
-            }
-            return dispatch("page", data)
-        },
+        // //优先经过缓存查询
+        // get: ({dispatch, commit, state}, data) => {
+        //     let d = state.data[JSON.stringify(data)];
+        //     let now = new Date().getTime();
+        //     if (d && now - d.timestamp < 1000 * 60 * 3) {
+        //         return new Promise(r => r(d.data))
+        //     }
+        //     return dispatch("page", data)
+        // },
         //启动随访
         startReview: ({dispatch, commit, state}, {uuid, nextReview, reviewInterval}) => request({
             url: "/Record/startReview",
@@ -56,6 +56,11 @@ export default {
         //通知
         notice: ({dispatch, commit, sign}, uuid) => request({
             url: "/Record/notice",
+            params: {uuid},
+        }),
+        //通知
+        getById: ({dispatch, commit, sign}, uuid) => request({
+            url: "/Record/getById",
             params: {uuid},
         }),
         method: ({dispatch, commit, state}, payload) => {

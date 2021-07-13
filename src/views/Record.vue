@@ -46,7 +46,10 @@
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange">
       </el-pagination>
-      <el-table :data="myRecord" stripe>
+      <el-table :data="myRecord" stripe
+                @cell-click="cellClick"
+
+      >
         <el-table-column label="详情" type="expand">
           <template #default="props">
             <el-form inline>
@@ -76,6 +79,7 @@
           </template>
         </el-table-column>
         <el-table-column label="住院号" prop="uuid"/>
+        <el-table-column label="疾病类型" prop="diseaseType"/>
         <el-table-column label="姓名" prop="patientName"/>
         <el-table-column label="性别" prop="gender" width="60px"/>
         <el-table-column label="出生日期" prop="birthday.month"/>
@@ -183,6 +187,11 @@ export default {
   },
   methods: {
     functionNotImplement,
+    cellClick(row, column, cell, event) {
+      if (column.property === 'uuid') {
+        this.$router.push("/detail/" + row.uuid)
+      }
+    },
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
       this.params.page.size = val;
@@ -261,16 +270,9 @@ export default {
         this.total = res.total
       })
     },
-    getRecord() {
-      this.$store.dispatch("record/get", this.params.page).then(res => {
-        this.myRecord = res.records
-        this.total = res.total
-        console.log(this.myRecord)
-      })
-    }
   },
   mounted() {
-    this.getRecord()
+    this.page()
   },
   watch: {},
   props: {},

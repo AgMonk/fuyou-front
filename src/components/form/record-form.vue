@@ -17,6 +17,17 @@
     </el-form-item>
   </el-form>
   <el-form inline label-width="80px">
+    <!--    复查相关字段-->
+    <el-form-item label="疾病类型" required>
+      <el-select v-model="data.diseaseType" placeholder="疾病类型" style="width:100%">
+        <el-option value="乳腺癌"/>
+        <el-option value="甲状腺癌"/>
+        <el-option value="非哺乳期乳腺炎"/>
+      </el-select>
+    </el-form-item>
+
+  </el-form>
+  <el-form inline label-width="80px">
     <el-form-item label="性别" required>
       <el-select v-model="data.gender" placeholder="性别" style="width:100%">
         <el-option value="男"/>
@@ -101,6 +112,7 @@ let defaultData = {
   regDate: new Date(),
   contactName: "",
   contactPhone: "",
+  diseaseType: "",
 
   //  复查相关字段
   reviewStatus: "无需通知",
