@@ -7,6 +7,10 @@
 
     <el-main>
       <el-descriptions :column="4" border title="档案信息">
+        <template #extra>
+          <my-button text="修改" @click="functionNotImplement"/>
+          <my-button text="删除" type="danger" @click="del(uuid)"/>
+        </template>
         <el-descriptions-item label="住院号">{{ record.uuid }}</el-descriptions-item>
         <el-descriptions-item label="患者姓名">{{ record.patientName }}</el-descriptions-item>
         <el-descriptions-item label="性别">{{ record.gender }}</el-descriptions-item>
@@ -44,10 +48,12 @@
 
 <script>
 import Operation from "@/views/details/Operation";
+import {functionNotImplement} from "@/assets/js/utils";
+import MyButton from "@/components/my/my-button";
 
 export default {
   name: "Details",
-  components: {Operation},
+  components: {MyButton, Operation},
   data() {
     return {
       activeName: "手术情况",
@@ -55,7 +61,16 @@ export default {
       record: {},
     }
   },
-  methods: {},
+  methods: {
+    functionNotImplement,
+    del(uuid) {
+      if (confirm("删除档案？")) {
+        this.$store.dispatch("record/del", uuid).then(res => {
+          this.$message.success(res.message)
+        })
+      }
+    },
+  },
   mounted() {
     console.log(this.uuid)
 
