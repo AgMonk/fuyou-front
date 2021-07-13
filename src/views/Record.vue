@@ -82,7 +82,7 @@
         <el-table-column label="疾病类型" prop="diseaseType"/>
         <el-table-column label="姓名" prop="patientName"/>
         <el-table-column label="性别" prop="gender" width="60px"/>
-        <el-table-column label="出生日期" prop="birthday.month"/>
+        <el-table-column label="出生年月" prop="birthday.month"/>
         <el-table-column label="上次通知" prop="lastNotice.date"/>
         <el-table-column label="下次复查" prop="nextReview.date"/>
         <el-table-column label="复查间隔（天）" prop="reviewInterval"/>

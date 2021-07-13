@@ -3,15 +3,16 @@
 <template>
   <el-container direction="vertical">
     <!--  <el-container direction="horizontal">-->
-    <el-header></el-header>
+    <!--    <el-header></el-header>-->
 
     <el-main>
-      <el-descriptions :column="4" border direction="vertical" title="档案信息">
+      <el-descriptions :column="4" border title="档案信息">
         <el-descriptions-item label="住院号">{{ record.uuid }}</el-descriptions-item>
         <el-descriptions-item label="患者姓名">{{ record.patientName }}</el-descriptions-item>
         <el-descriptions-item label="性别">{{ record.gender }}</el-descriptions-item>
         <el-descriptions-item label="疾病类型">{{ record.diseaseType }}</el-descriptions-item>
         <el-descriptions-item label="电话">{{ record.phone }}</el-descriptions-item>
+        <el-descriptions-item v-if="record.birthday" label="出生年月">{{ record.birthday.month }}</el-descriptions-item>
         <el-descriptions-item label="主管医生">{{ record.doctorInCharge }}</el-descriptions-item>
         <el-descriptions-item v-if="record.regDate" label="入院日期">{{ record.regDate.date }}</el-descriptions-item>
         <el-descriptions-item v-if="record.leaveHospital" label="出院日期">{{ record.leaveHospital.date }}</el-descriptions-item>
