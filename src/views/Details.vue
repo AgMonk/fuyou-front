@@ -73,7 +73,6 @@ export default {
 
     this.$store.dispatch("record/getById", this.uuid).then(res => {
       this.record = res.data
-      console.log(res.data)
     })
   },
   watch: {},

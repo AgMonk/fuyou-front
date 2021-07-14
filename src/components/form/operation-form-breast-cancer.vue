@@ -1,7 +1,7 @@
 <!--suppress HtmlUnknownTag -->
 <template>
   <div>
-    <el-divider content-position="left"><b>基础信息</b></el-divider>
+    <my-divider text="基础信息"/>
     <el-form label-width="80px">
       <el-row>
         <el-col :span="12">
@@ -22,7 +22,18 @@
       <el-row>
         <el-col :span="12">
           <el-form-item label="手术术式">
-            <el-input v-model="data.surgicalApproach" placeholder="手术术式"/>
+            <el-select
+                v-model="data.surgicalApproach"
+                allow-create
+                filterable
+                placeholder="手术术式"
+            >
+              <el-option value="改良根治术"/>
+              <el-option value="保乳前哨"/>
+              <el-option value="保乳腋清"/>
+              <el-option value="全切前哨"/>
+
+            </el-select>
           </el-form-item>
         </el-col>
         <el-col :span="12">
@@ -32,7 +43,7 @@
         </el-col>
       </el-row>
     </el-form>
-    <el-divider content-position="left"><b>化疗情况</b></el-divider>
+    <my-divider text="化疗情况"/>
     <el-form label-width="80px">
       <el-form-item label="化疗">
         <el-select v-model="data.detail.chemotherapy.data" multiple style="width:100%">
@@ -50,7 +61,7 @@
         <el-input v-model="data.detail.chemotherapy.result" placeholder="化疗反应"/>
       </el-form-item>
     </el-form>
-    <el-divider content-position="left"><b>放疗情况</b></el-divider>
+    <my-divider text="放疗情况"/>
     <el-form inline>
       <el-form-item label="开始日期">
         <el-date-picker
@@ -85,10 +96,12 @@
 
 <script>
 import MyButton from "@/components/my/my-button";
+import MyDivider from "@/components/my/my-divider";
+
 
 export default {
   name: "operation-form-breast-cancer",
-  components: {MyButton},
+  components: {MyDivider, MyButton},
   data() {
     return {
       data: {
@@ -116,21 +129,29 @@ export default {
       },
     }
   },
-  methods: {},
+  methods: {
+    overwrite(e) {
+      this.data = e ? e : this.data;
+    }
+  },
   mounted() {
+    this.overwrite(this.importData)
   },
   watch: {
-    "data": {
+    // "data": {
+    //   handler(e) {
+    //     console.log(e)
+    //   }
+    // },
+    "importData": {
       handler(e) {
-        console.log(e)
+        this.overwrite(e)
       }
-    }
+    },
+
   },
   props: {
-    recordUuid: {
-      required: true,
-      type: String,
-    }
+    importData: {}
   },
 }
 
