@@ -10,6 +10,7 @@
                                   @updated="findAll"/>
       <el-dialog v-model="formVisible" title="手术情况">
         <operation-form-breast-cancer v-if="diseaseType==='乳腺癌'" @submit="submit"/>
+        <operation-form-thyroid-cancer v-if="diseaseType==='甲状腺癌'" @submit="submit"/>
       </el-dialog>
     </el-main>
     <el-footer></el-footer>
@@ -21,10 +22,11 @@
 import MyButton from "@/components/my/my-button";
 import OperationFormBreastCancer from "@/components/form/operation-form-breast-cancer";
 import DescriptionsBreastCancer from "@/components/descriptions/descriptions-breast-cancer";
+import OperationFormThyroidCancer from "@/components/form/operation-form-thyroid-cancer";
 
 export default {
   name: "Operation",
-  components: {DescriptionsBreastCancer, OperationFormBreastCancer, MyButton},
+  components: {OperationFormThyroidCancer, DescriptionsBreastCancer, OperationFormBreastCancer, MyButton},
   data() {
     return {
       formVisible: false,
@@ -38,6 +40,8 @@ export default {
         this.$message.success(res.message)
         this.findAll()
         this.formVisible = false;
+      }).catch(e => {
+        this.$message.error(e.join(","))
       })
     },
     findAll() {
