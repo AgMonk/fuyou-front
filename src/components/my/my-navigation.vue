@@ -40,7 +40,7 @@ export default {
     }
   },
   mounted() {
-    console.log(routes)
+    // console.log(routes)
   },
 }
 

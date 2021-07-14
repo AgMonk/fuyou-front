@@ -16,26 +16,23 @@
         <el-descriptions-item label="性别">{{ record.gender }}</el-descriptions-item>
         <el-descriptions-item label="疾病类型">{{ record.diseaseType }}</el-descriptions-item>
         <el-descriptions-item label="电话">{{ record.phone }}</el-descriptions-item>
-        <el-descriptions-item v-if="record.birthday" label="出生年月">{{ record.birthday.month }}</el-descriptions-item>
+        <el-descriptions-item label="出生年月">{{ record.birthday ? record.birthday.month : "" }}</el-descriptions-item>
         <el-descriptions-item label="主管医生">{{ record.doctorInCharge }}</el-descriptions-item>
-        <el-descriptions-item v-if="record.regDate" label="入院日期">{{ record.regDate.date }}</el-descriptions-item>
-        <el-descriptions-item v-if="record.leaveHospital" label="出院日期">{{ record.leaveHospital.date }}</el-descriptions-item>
-        <el-descriptions-item v-if="record.nextReview" label="下次复诊">{{ record.nextReview.date }}</el-descriptions-item>
+        <el-descriptions-item label="入院日期">{{ record.regDate ? record.regDate.date : "" }}</el-descriptions-item>
+        <el-descriptions-item label="出院日期">{{ record.leaveHospital ? record.leaveHospital.date : "" }}</el-descriptions-item>
+        <el-descriptions-item label="下次复诊">{{ record.nextReview ? record.nextReview.date : "" }}</el-descriptions-item>
         <el-descriptions-item label="复诊间隔（天）">{{ record.reviewInterval }}</el-descriptions-item>
         <el-descriptions-item label="复诊状态">{{ record.reviewStatus }}</el-descriptions-item>
-        <el-descriptions-item v-if="record.lastNotice" label="上次通知">{{ record.lastNotice.timeString }}</el-descriptions-item>
-        <el-descriptions-item v-if="record.recordTimestamp" label="入档时间">{{
-            record.recordTimestamp.timeString
-          }}
-        </el-descriptions-item>
-        <el-descriptions-item v-if="record.contactName" label="联系人">{{ record.contactName }}</el-descriptions-item>
-        <el-descriptions-item v-if="record.contactName" label="联系人电话">{{ record.contactPhone }}</el-descriptions-item>
+        <el-descriptions-item label="上次通知">{{ record.lastNotice ? record.lastNotice.timeString : "" }}</el-descriptions-item>
+        <el-descriptions-item label="入档时间">{{ record.recordTimestamp ? record.recordTimestamp.timeString : "" }}</el-descriptions-item>
+        <el-descriptions-item label="联系人">{{ record.contactName ? record.contactName : "" }}</el-descriptions-item>
+        <el-descriptions-item label="联系人电话">{{ record.contactName ? record.contactPhone : "" }}</el-descriptions-item>
         <el-descriptions-item label="病史">{{ record.medicalHistory }}</el-descriptions-item>
       </el-descriptions>
 
       <el-tabs v-model="activeName" type="card">
         <el-tab-pane label="手术情况" name="手术情况">
-          <operation :record-uuid="uuid"/>
+          <operation :disease-type="record.diseaseType" :record-uuid="uuid"/>
         </el-tab-pane>
         <el-tab-pane label="复诊记录" name="复诊记录">复诊记录</el-tab-pane>
       </el-tabs>
@@ -72,7 +69,7 @@ export default {
     },
   },
   mounted() {
-    console.log(this.uuid)
+    // console.log(this.uuid)
 
     this.$store.dispatch("record/getById", this.uuid).then(res => {
       this.record = res.data
