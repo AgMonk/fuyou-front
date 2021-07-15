@@ -28,7 +28,6 @@
                 filterable
                 placeholder="手术术式"
             >
-              <!--              <el-option value="改良根治术"/>-->
 
             </el-select>
           </el-form-item>

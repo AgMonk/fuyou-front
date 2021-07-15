@@ -24,13 +24,13 @@
 <script>
 import MyButton from "@/components/my/my-button";
 import OperationFormBreastCancer from "@/components/form/operation-form-breast-cancer";
-import DescriptionsBreastCancer from "@/components/descriptions/descriptions-breast-cancer";
-import DescriptionsThyroidCancer from "@/components/descriptions/descriptions-breast-cancer";
 import OperationFormThyroidCancer from "@/components/form/operation-form-thyroid-cancer";
+import DescriptionsBreastCancer from "@/components/descriptions/descriptions-breast-cancer";
+import DescriptionsThyroidCancer from "@/components/descriptions/descriptions-thyroid-cancer";
 
 export default {
   name: "Operation",
-  components: {DescriptionsThyroidCancer, OperationFormThyroidCancer, DescriptionsBreastCancer, OperationFormBreastCancer, MyButton},
+  components: {DescriptionsThyroidCancer, DescriptionsBreastCancer, OperationFormThyroidCancer, OperationFormBreastCancer, MyButton},
   data() {
     return {
       formVisible: false,

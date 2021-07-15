@@ -9,35 +9,30 @@
       </template>
       <el-descriptions-item label="手术时间">{{ data.timestamp ? data.timestamp.date : "" }}</el-descriptions-item>
       <el-descriptions-item label="手术术式">{{ data.surgicalApproach }}
-
-
       </el-descriptions-item>
       <el-descriptions-item label="术后病理">{{ data.pathology }}</el-descriptions-item>
-
-
-    </el-descriptions>
-    <el-descriptions :column="2" border style="margin-top: 20px" title="化疗">
-      <el-descriptions-item label="化疗">
-        <my-tag v-for="(item,i) in data.detail.chemotherapy.data" :key="i" :text="item"/>
-      </el-descriptions-item>
-      <el-descriptions-item label="化疗反应">{{ data.detail.chemotherapy.result }}</el-descriptions-item>
     </el-descriptions>
 
-    <el-descriptions :column="2" border style="margin-top: 20px" title="放疗">
-      <el-descriptions-item label="开始日期">{{
-          data.detail.radiotherapy.start ? new Date(data.detail.radiotherapy.start * 1000).format("yyyy-MM-dd") : ""
-        }}
+    <el-descriptions :column="3" border style="margin-top: 20px" title="MACIS评分">
+      <el-descriptions-item label="年龄">{{ data.detail.MACIS.age }}</el-descriptions-item>
+      <el-descriptions-item label="肿瘤直径(cm)">{{ data.detail.MACIS.diameter }}</el-descriptions-item>
+      <el-descriptions-item label="未完整切除">
+        <true-or-false :b="data.detail.MACIS.notCompletelyCut"/>
       </el-descriptions-item>
-      <el-descriptions-item label="结束日期">{{
-          data.detail.radiotherapy.end ? new Date(data.detail.radiotherapy.end * 1000).format("yyyy-MM-dd") : ""
-        }}
+      <el-descriptions-item label="甲状腺外侵犯">
+        <true-or-false :b="data.detail.MACIS.invasion"/>
       </el-descriptions-item>
-      <el-descriptions-item label="照射野">{{ data.detail.radiotherapy.irradiationField }}</el-descriptions-item>
-      <el-descriptions-item label="剂量(次)">{{ data.detail.radiotherapy.num }}</el-descriptions-item>
+      <el-descriptions-item label="远处转移">
+        <true-or-false :b="data.detail.MACIS.transfer"/>
+      </el-descriptions-item>
+      <el-descriptions-item label="总评分">
+        <macis-score :data="data.detail.MACIS"/>
+      </el-descriptions-item>
     </el-descriptions>
+
 
     <el-dialog v-model="formVisible" title="手术情况">
-      <operation-form-breast-cancer :importData="data" @submit="submit"/>
+      <operation-form-thyroid-cancer :importData="data" @submit="submit"/>
     </el-dialog>
   </div>
 </template>
@@ -47,11 +42,13 @@ import {functionNotImplement} from "@/assets/js/utils";
 import MyButton from "@/components/my/my-button";
 import MyDivider from "@/components/my/my-divider";
 import MyTag from "@/components/my/my-tag";
-import OperationFormBreastCancer from "@/components/form/operation-form-breast-cancer";
+import MacisScore from "@/components/macisScore";
+import TrueOrFalse from "@/components/descriptions/true-or-false";
+import OperationFormThyroidCancer from "@/components/form/operation-form-thyroid-cancer";
 
 export default {
-  name: "descriptions-breast-cancer",
-  components: {OperationFormBreastCancer, MyTag, MyDivider, MyButton},
+  name: "descriptions-thyroid-cancer",
+  components: {OperationFormThyroidCancer, TrueOrFalse, MacisScore, MyTag, MyDivider, MyButton},
   data() {
     return {
       formVisible: false,
