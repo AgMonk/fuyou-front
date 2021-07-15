@@ -53,6 +53,10 @@
           <el-option value="FEC×3-T×3"/>
           <el-option value="FEC×6"/>
           <el-option value="TEC×6"/>
+          <el-option value="THP"/>
+          <el-option value="TCbHP"/>
+          <el-option value="TC×4"/>
+          <el-option value="TC×6"/>
           <el-option value="CMF×6"/>
           <el-option value="新辅助"/>
         </el-select>

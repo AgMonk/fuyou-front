@@ -9,13 +9,13 @@
       <el-form inline label-width="100px" size="small">
         <h4>过滤条件</h4>
         <el-form-item label="住院号">
-          <el-input v-model="params.page.condition.uuid" placeholder="住院号" @change="page"/>
+          <el-input v-model="params.page.condition.uuid" clearable placeholder="住院号" @change="page"/>
         </el-form-item>
         <el-form-item label="患者姓名">
-          <el-input v-model="params.page.condition.patientName" placeholder="患者姓名" @change="page"/>
+          <el-input v-model="params.page.condition.patientName" clearable placeholder="患者姓名" @change="page"/>
         </el-form-item>
         <el-form-item label="主管医生">
-          <el-input v-model="params.page.condition.doctorInCharge" placeholder="主管医生" @change="page"/>
+          <el-input v-model="params.page.condition.doctorInCharge" clearable placeholder="主管医生" @change="page"/>
         </el-form-item>
         <el-form-item label="下次复诊">
           <el-date-picker
@@ -125,7 +125,7 @@
             </el-date-picker>
           </el-form-item>
           <el-form-item label="复查间隔（天）">
-            <el-input v-model="params.startReview.reviewInterval"/>
+            <el-input v-model="params.startReview.reviewInterval" clearable/>
           </el-form-item>
 
         </el-form>
@@ -165,8 +165,8 @@ export default {
             uuid: undefined,
             patientName: undefined,
             doctorInCharge: undefined,
-            reviewStatus: "",
-            nextReview: {timestamp: null},
+            reviewStatus: undefined,
+            nextReview: {timestamp: ""},
           }
         },
         startReview: {

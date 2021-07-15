@@ -8,6 +8,9 @@
     <el-main>
       <descriptions-breast-cancer v-for="(item,i) in data" v-if="diseaseType==='乳腺癌'" :key="i" :data="item"
                                   @updated="findAll"/>
+      <descriptions-thyroid-cancer v-for="(item,i) in data" v-if="diseaseType==='甲状腺癌'" :key="i" :data="item"
+                                   @updated="findAll"/>
+
       <el-dialog v-model="formVisible" title="手术情况">
         <operation-form-breast-cancer v-if="diseaseType==='乳腺癌'" @submit="submit"/>
         <operation-form-thyroid-cancer v-if="diseaseType==='甲状腺癌'" @submit="submit"/>
@@ -22,11 +25,12 @@
 import MyButton from "@/components/my/my-button";
 import OperationFormBreastCancer from "@/components/form/operation-form-breast-cancer";
 import DescriptionsBreastCancer from "@/components/descriptions/descriptions-breast-cancer";
+import DescriptionsThyroidCancer from "@/components/descriptions/descriptions-breast-cancer";
 import OperationFormThyroidCancer from "@/components/form/operation-form-thyroid-cancer";
 
 export default {
   name: "Operation",
-  components: {OperationFormThyroidCancer, DescriptionsBreastCancer, OperationFormBreastCancer, MyButton},
+  components: {DescriptionsThyroidCancer, OperationFormThyroidCancer, DescriptionsBreastCancer, OperationFormBreastCancer, MyButton},
   data() {
     return {
       formVisible: false,

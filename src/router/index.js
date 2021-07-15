@@ -50,6 +50,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+    console.clear()
     store.dispatch('user/getStatus').catch((res) => {
         if (to.name !== routeNameMe) {
             ElMessage.error(res)

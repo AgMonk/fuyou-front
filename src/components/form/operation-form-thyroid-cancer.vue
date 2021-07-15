@@ -101,10 +101,10 @@ export default {
     return {
       data: {
         //手术时间
-        timestamp: {timestamp: "",},
+        timestamp: {timestamp: new Date().getTime() / 1000,},
         diseaseType: "甲状腺癌",
         //手术术式
-        surgicalApproach: "",
+        surgicalApproach: "术式",
         //术后病理
         pathology: "",
         detail: {
