@@ -155,7 +155,7 @@ export default {
 
   },
   props: {
-    importData: {}
+    importData: {},
   },
 }
 

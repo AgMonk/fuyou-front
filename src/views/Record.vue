@@ -92,7 +92,7 @@
             <my-phone-number :is-link="props.row.reviewStatus==='未通知'" :phone-number="props.row.phone"/>
           </template>
         </el-table-column>
-        <el-table-column label="操作">
+        <el-table-column label="操作" prop="operating">
           <template #default="props">
             <my-button v-if="props.row.reviewStatus==='未通知'" text="通知" tooltip="电话通知后点击" @click="notice(props.row.uuid)"/>
             <my-button v-if="props.row.reviewStatus==='已通知'" text="签到" tooltip="签到后下次复查时间为：当前日期+复查间隔"
@@ -188,7 +188,7 @@ export default {
   methods: {
     functionNotImplement,
     cellClick(row, column, cell, event) {
-      if (column.property === 'uuid') {
+      if (column.property !== 'operating') {
         this.$router.push("/detail/" + row.uuid)
       }
     },

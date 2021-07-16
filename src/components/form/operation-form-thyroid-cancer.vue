@@ -2,61 +2,51 @@
 <template>
   <div>
     <my-divider text="基础信息"/>
-    <el-form label-width="80px">
-      <el-row>
-        <el-col :span="12">
-          <el-form-item label="疾病类型">{{ data.diseaseType }}</el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="手术日期">
-            <el-date-picker
-                v-model="data.timestamp.timestamp"
-                placeholder="选择日期"
-                style="width:100%"
-                type="date"
-                value-format="X">
-            </el-date-picker>
-          </el-form-item>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="12">
-          <el-form-item label="部位">
-            <el-radio-group v-model="data.surgicalApproach[0]">
-              <el-radio-button label="左侧"/>
-              <el-radio-button label="右侧"/>
-              <el-radio-button label="双侧"/>
-            </el-radio-group>
-          </el-form-item>
-          <el-form-item label="峡部">
-            <el-radio-group v-model="data.surgicalApproach[1]">
-              <el-radio-button label="">无</el-radio-button>
-              <el-radio-button label="有"/>
-            </el-radio-group>
-          </el-form-item>
-          <el-form-item label="淋巴结">
-            <el-radio-group v-model="data.surgicalApproach[2]">
-              <el-radio-button label="">无</el-radio-button>
-              <el-radio-button label="中央区"/>
-              <el-radio-button label="颈侧区"/>
-            </el-radio-group>
-          </el-form-item>
-          <el-form-item label="入路">
-            <el-radio-group v-model="data.surgicalApproach[3]">
-              <el-radio-button label="经腋窝无充气"/>
-              <el-radio-button label="经胸乳"/>
-              <el-radio-button label="经腋窝"/>
-              <el-radio-button label="开放"/>
-            </el-radio-group>
-          </el-form-item>
+    <el-form inline label-width="80px">
+      <el-form-item label="疾病类型">{{ data.diseaseType }}</el-form-item>
+      <el-form-item label="手术日期">
+        <el-date-picker
+            v-model="data.timestamp.timestamp"
+            placeholder="选择日期"
+            style="width:100%"
+            type="date"
+            value-format="X">
+        </el-date-picker>
+      </el-form-item>
+      <el-form-item label="部位">
+        <el-radio-group v-model="data.surgicalApproach[0]" size="small">
+          <el-radio-button label="左侧"/>
+          <el-radio-button label="右侧"/>
+          <el-radio-button label="双侧"/>
+        </el-radio-group>
+      </el-form-item>
+      <el-form-item label="峡部">
+        <el-radio-group v-model="data.surgicalApproach[1]" size="small">
+          <el-radio-button label="">无</el-radio-button>
+          <el-radio-button label="有"/>
+        </el-radio-group>
+      </el-form-item>
+      <el-form-item label="淋巴结">
+        <el-radio-group v-model="data.surgicalApproach[2]" size="small">
+          <el-radio-button label="">无</el-radio-button>
+          <el-radio-button label="中央区"/>
+          <el-radio-button label="颈侧区"/>
+        </el-radio-group>
+      </el-form-item>
+      <el-form-item label="入路">
+        <el-radio-group v-model="data.surgicalApproach[3]" size="small">
+          <el-radio-button label="经腋窝无充气"/>
+          <el-radio-button label="经胸乳"/>
+          <el-radio-button label="经腋窝"/>
+          <el-radio-button label="开放"/>
+        </el-radio-group>
+      </el-form-item>
 
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="术后病理">
-            <el-input v-model="data.pathology" placeholder="术后病理"/>
-          </el-form-item>
-        </el-col>
-      </el-row>
+    </el-form>
+    <el-form>
+      <el-form-item label="术后病理">
+        <el-input v-model="data.pathology" placeholder="术后病理" style="width:100%"/>
+      </el-form-item>
     </el-form>
     <my-divider text="MACIS评分表"/>
     <el-form label-width="120px">
@@ -154,7 +144,7 @@ export default {
 
   },
   props: {
-    importData: {}
+    importData: {},
   },
 }
 

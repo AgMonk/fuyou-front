@@ -77,7 +77,7 @@ export default {
     },
   },
   mounted() {
-    console.log(this.data)
+    console.log(this.recordUuid)
   },
   watch: {
     "data": {
@@ -89,7 +89,8 @@ export default {
   props: {
     data: {
       required: true
-    }
+    },
+    recordUuid: {required: true,}
   },
 }
 

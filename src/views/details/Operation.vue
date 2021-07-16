@@ -6,9 +6,9 @@
       <my-button text="添加" tooltip="添加手术记录" @click="formVisible=true;"/>
     </el-header>
     <el-main>
-      <descriptions-breast-cancer v-for="(item,i) in data" v-if="diseaseType==='乳腺癌'" :key="i" :data="item"
+      <descriptions-breast-cancer v-for="(item,i) in data" v-if="diseaseType==='乳腺癌'" :key="i" :data="item" :recordUuid="recordUuid"
                                   @updated="findAll"/>
-      <descriptions-thyroid-cancer v-for="(item,i) in data" v-if="diseaseType==='甲状腺癌'" :key="i" :data="item"
+      <descriptions-thyroid-cancer v-for="(item,i) in data" v-if="diseaseType==='甲状腺癌'" :key="i" :data="item" :recordUuid="recordUuid"
                                    @updated="findAll"/>
 
       <el-dialog v-model="formVisible" title="手术情况">

@@ -1,15 +1,17 @@
 <!--suppress HtmlUnknownTag -->
 <template>
   <div>
-    <h4 style="background-color: #449a737a">手术：{{ data.surgicalApproach }}</h4>
+    <h4 style="background-color: #449a737a">手术：{{ data.surgicalApproach[0] + ',' + data.surgicalApproach[3] }}</h4>
     <el-descriptions :column="2" border title="基础信息">
       <template #extra>
         <my-button text="修改" @click="formVisible=true;"/>
         <my-button text="删除" type="danger" @click="del"/>
       </template>
       <el-descriptions-item label="手术时间">{{ data.timestamp ? data.timestamp.date : "" }}</el-descriptions-item>
-      <el-descriptions-item label="手术术式">{{ data.surgicalApproach }}
-      </el-descriptions-item>
+      <el-descriptions-item label="部位">{{ data.surgicalApproach[0] }}</el-descriptions-item>
+      <el-descriptions-item label="峡部">{{ data.surgicalApproach[1] }}</el-descriptions-item>
+      <el-descriptions-item label="淋巴结">{{ data.surgicalApproach[2] }}</el-descriptions-item>
+      <el-descriptions-item label="入路">{{ data.surgicalApproach[3] }}</el-descriptions-item>
       <el-descriptions-item label="术后病理">{{ data.pathology }}</el-descriptions-item>
     </el-descriptions>
 
@@ -74,7 +76,7 @@ export default {
     },
   },
   mounted() {
-    console.log(this.data)
+    console.log(this.recordUuid)
   },
   watch: {
     "data": {
@@ -86,7 +88,8 @@ export default {
   props: {
     data: {
       required: true
-    }
+    },
+    recordUuid: {required: true,}
   },
 }
 
