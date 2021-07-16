@@ -1,14 +1,14 @@
 <!--suppress HtmlUnknownTag -->
 <template>
   <div>
-    <h4 style="background-color: #449a737a">手术：{{ data.surgicalApproach }}</h4>
+    <h4 style="background-color: #449a737a">手术：{{ data.surgicalApproach[0] }}</h4>
     <el-descriptions :column="2" border title="基础信息">
       <template #extra>
         <my-button text="修改" @click="formVisible=true;"/>
         <my-button text="删除" type="danger" @click="del"/>
       </template>
       <el-descriptions-item label="手术时间">{{ data.timestamp ? data.timestamp.date : "" }}</el-descriptions-item>
-      <el-descriptions-item label="手术术式">{{ data.surgicalApproach }}
+      <el-descriptions-item label="手术术式">{{ data.surgicalApproach[0] }}
 
 
       </el-descriptions-item>

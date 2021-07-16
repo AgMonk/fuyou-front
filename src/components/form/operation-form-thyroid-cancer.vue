@@ -21,16 +21,35 @@
       </el-row>
       <el-row>
         <el-col :span="12">
-          <el-form-item label="手术术式">
-            <el-select
-                v-model="data.surgicalApproach"
-                allow-create
-                filterable
-                placeholder="手术术式"
-            >
-
-            </el-select>
+          <el-form-item label="部位">
+            <el-radio-group v-model="data.surgicalApproach[0]">
+              <el-radio-button label="左侧"/>
+              <el-radio-button label="右侧"/>
+              <el-radio-button label="双侧"/>
+            </el-radio-group>
           </el-form-item>
+          <el-form-item label="峡部">
+            <el-radio-group v-model="data.surgicalApproach[1]">
+              <el-radio-button label="">无</el-radio-button>
+              <el-radio-button label="有"/>
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="淋巴结">
+            <el-radio-group v-model="data.surgicalApproach[2]">
+              <el-radio-button label="">无</el-radio-button>
+              <el-radio-button label="中央区"/>
+              <el-radio-button label="颈侧区"/>
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="入路">
+            <el-radio-group v-model="data.surgicalApproach[3]">
+              <el-radio-button label="经腋窝无充气"/>
+              <el-radio-button label="经胸乳"/>
+              <el-radio-button label="经腋窝"/>
+              <el-radio-button label="开放"/>
+            </el-radio-group>
+          </el-form-item>
+
         </el-col>
         <el-col :span="12">
           <el-form-item label="术后病理">
@@ -48,11 +67,6 @@
                        show-input
                        type="number">
             </el-slider>
-            <!--            <el-input type="number"-->
-            <!--                      v-model="data.detail.MACIS.age"-->
-            <!--                      show-input>-->
-            <!--            </el-input>-->
-            <!--            -->
           </el-form-item>
         </el-col>
         <el-col :span="12">
@@ -103,7 +117,7 @@ export default {
         timestamp: {timestamp: new Date().getTime() / 1000,},
         diseaseType: "甲状腺癌",
         //手术术式
-        surgicalApproach: "术式",
+        surgicalApproach: ["左侧", "", "", "经腋窝无充气"],
         //术后病理
         pathology: "",
         detail: {

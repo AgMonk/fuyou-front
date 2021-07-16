@@ -23,7 +23,7 @@
         <el-col :span="12">
           <el-form-item label="手术术式">
             <el-select
-                v-model="data.surgicalApproach"
+                v-model="data.surgicalApproach[0]"
                 allow-create
                 filterable
                 placeholder="手术术式"
@@ -113,7 +113,7 @@ export default {
         timestamp: {timestamp: "",},
         diseaseType: "乳腺癌",
         //手术术式
-        surgicalApproach: "",
+        surgicalApproach: [],
         //术后病理
         pathology: "",
         detail: {
