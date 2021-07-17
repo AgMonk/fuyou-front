@@ -142,11 +142,6 @@ export default {
     this.overwrite(this.importData)
   },
   watch: {
-    // "data": {
-    //   handler(e) {
-    //     console.log(e)
-    //   }
-    // },
     "importData": {
       handler(e) {
         this.overwrite(e)

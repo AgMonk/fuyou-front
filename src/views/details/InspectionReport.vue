@@ -31,7 +31,23 @@ export default {
       formVisible: false,
     }
   },
-  methods: {},
+  methods: {
+    submit(e) {
+      e.recordUuid = this.recordUuid
+      this.$store.dispatch("inspectionReport/add", e).then(res => {
+        this.$message.success(res.message)
+        this.findAll()
+        this.formVisible = false;
+      }).catch(e => {
+        this.$message.error(e.join(","))
+      })
+    },
+    findAll() {
+      this.$store.dispatch("inspectionReport/findAll", this.recordUuid).then(res => {
+        this.data = res.data;
+      })
+    },
+  },
   mounted() {
   },
   watch: {},
