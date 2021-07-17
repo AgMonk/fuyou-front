@@ -1,6 +1,8 @@
 
 <template>
-  <el-divider content-position="left"><b>{{ text }}</b></el-divider>
+  <el-divider content-position="left"><b>{{ text }}</b>
+    <slot/>
+  </el-divider>
 </template>
 
 <script>
@@ -15,7 +17,6 @@ export default {
   watch: {},
   props: {
     text: {
-      required: true,
       type: String,
     }
   },

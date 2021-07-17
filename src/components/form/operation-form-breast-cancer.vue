@@ -91,9 +91,11 @@
       </el-form-item>
 
 
-      <el-form-item label-width="0">
-        <my-button text="提交" @click="$emit(`submit`,data)"/>
-      </el-form-item>
+      <el-form>
+        <el-form-item label-width="0">
+          <my-button text="提交" @click="$emit(`submit`,data)"/>
+        </el-form-item>
+      </el-form>
     </el-form>
   </div>
 </template>
@@ -129,7 +131,7 @@ export default {
             irradiationField: "",
             num: "",
           }
-        }
+        },
       },
     }
   },
