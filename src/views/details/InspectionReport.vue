@@ -7,9 +7,9 @@
 
     <el-main>
       <el-dialog v-model="formVisible" title="添加检查报告">
-        <inspection-report-form-breast-cancer v-if="diseaseType==='乳腺癌'"/>
-        <inspection-report-form-thyroid-cancer v-if="diseaseType==='甲状腺癌'"/>
-        <inspection-report-form-mastitis v-if="diseaseType==='非哺乳期乳腺炎'"/>
+        <inspection-report-form-breast-cancer v-if="diseaseType==='乳腺癌'" @submit="submit"/>
+        <inspection-report-form-thyroid-cancer v-if="diseaseType==='甲状腺癌'" @submit="submit"/>
+        <inspection-report-form-mastitis v-if="diseaseType==='非哺乳期乳腺炎'" @submit="submit"/>
       </el-dialog>
     </el-main>
     <el-footer></el-footer>

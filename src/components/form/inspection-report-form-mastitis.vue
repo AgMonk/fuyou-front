@@ -27,12 +27,13 @@
             </el-form-item>
           </el-col>
         </el-row>
-      </el-form>
-
-      <el-form>
         <el-form-item label="体征">
           <el-input v-model="data.description" placeholder="体征"/>
         </el-form-item>
+      </el-form>
+      <my-divider text="详细信息"/>
+
+      <el-form>
         <el-form-item label-width="0">
           <my-button text="提交" @click="$emit(`submit`,data)"/>
         </el-form-item>
