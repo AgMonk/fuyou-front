@@ -28,7 +28,7 @@
           </el-col>
         </el-row>
         <el-form-item label="体征">
-          <el-input v-model="data.description" placeholder="体征"/>
+          <el-input v-model="data.description" :autosize="{ minRows: 2, maxRows: 4}" placeholder="体征" type="textarea"/>
         </el-form-item>
       </el-form>
       <my-divider text="详细信息"/>

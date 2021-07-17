@@ -6,6 +6,14 @@
     </el-header>
 
     <el-main>
+      <el-collapse v-model="activeName" accordion>
+        <el-collapse-item v-for="(item,i) in data" :key="i" :name="i">
+          <template #title>{{ item.timestamp.date }} : {{ item.doctorName }}</template>
+          <inspection-report-description-mastitis :data="item" :record-uuid="recordUuid"/>
+        </el-collapse-item>
+      </el-collapse>
+
+
       <el-dialog v-model="formVisible" title="添加检查报告">
         <inspection-report-form-breast-cancer v-if="diseaseType==='乳腺癌'" @submit="submit"/>
         <inspection-report-form-thyroid-cancer v-if="diseaseType==='甲状腺癌'" @submit="submit"/>
@@ -18,17 +26,27 @@
 </template>
 
 <script>
+
+import MyButton from "@/components/my/my-button";
+import InspectionReportDescriptionMastitis from "@/components/descriptions/inspection-report-description-mastitis";
 import InspectionReportFormBreastCancer from "@/components/form/inspection-report-form-breast-cancer";
 import InspectionReportFormThyroidCancer from "@/components/form/inspection-report-form-thyroid-cancer";
 import InspectionReportFormMastitis from "@/components/form/inspection-report-form-mastitis";
-import MyButton from "@/components/my/my-button";
 
 export default {
   name: "inspection-report",
-  components: {MyButton, InspectionReportFormMastitis, InspectionReportFormThyroidCancer, InspectionReportFormBreastCancer},
+  components: {
+    InspectionReportFormMastitis,
+    InspectionReportFormThyroidCancer,
+    InspectionReportFormBreastCancer,
+    InspectionReportDescriptionMastitis,
+    MyButton
+  },
   data() {
     return {
+      activeName: "",
       formVisible: false,
+      data: [],
     }
   },
   methods: {
@@ -49,6 +67,7 @@ export default {
     },
   },
   mounted() {
+    this.findAll()
   },
   watch: {},
   props: {
