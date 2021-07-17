@@ -1,4 +1,4 @@
-<!--suppress HtmlUnknownTag -->
+
 <template>
   <el-tooltip v-if="tooltip" :content="tooltip" effect="dark" placement="bottom">
     <el-button :size="size" :type="type" @click="$emit(`click`,$event)">{{ text }}</el-button>

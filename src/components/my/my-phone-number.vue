@@ -1,4 +1,4 @@
-<!--suppress HtmlUnknownTag -->
+
 <template>
   <el-link v-if="isLink" :href="`tel:`+phoneNumber">{{ phoneNumber }}</el-link>
   <span v-else>{{ phoneNumber }}</span>

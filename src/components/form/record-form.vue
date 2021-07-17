@@ -1,4 +1,4 @@
-<!--suppress HtmlUnknownTag -->
+
 <template>
   <el-form inline label-width="80px">
     <el-form-item label="住院号" required>

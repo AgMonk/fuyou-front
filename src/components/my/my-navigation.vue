@@ -1,4 +1,4 @@
-<!--suppress HtmlUnknownTag -->
+
 <template>
   <el-menu
       :default-active.sync="activeIndex"

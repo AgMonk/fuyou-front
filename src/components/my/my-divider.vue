@@ -1,4 +1,4 @@
-<!--suppress HtmlUnknownTag -->
+
 <template>
   <el-divider content-position="left"><b>{{ text }}</b></el-divider>
 </template>

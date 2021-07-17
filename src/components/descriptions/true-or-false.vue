@@ -1,4 +1,4 @@
-<!--suppress HtmlUnknownTag -->
+
 <template>
   <b><span v-if="b" :style=" `color: `+trueColor">{{ trueText }}</span>
     <span v-else :style=" `color: `+falseColor">{{ falseText }}</span></b>

@@ -1,22 +1,35 @@
-<!--suppress HtmlUnknownTag -->
 <template>
   <el-container direction="vertical">
     <!--  <el-container direction="horizontal">-->
     <el-header>
-      检查报告
+      <my-button text="添加" tooltip="添加检查报告" @click="formVisible=true;"/>
     </el-header>
 
-    <el-main></el-main>
+    <el-main>
+      <el-dialog v-model="formVisible" title="添加检查报告">
+        <inspection-report-form-breast-cancer v-if="diseaseType==='乳腺癌'"/>
+        <inspection-report-form-thyroid-cancer v-if="diseaseType==='甲状腺癌'"/>
+        <inspection-report-form-mastitis v-if="diseaseType==='非哺乳期乳腺炎'"/>
+      </el-dialog>
+    </el-main>
     <el-footer></el-footer>
   </el-container>
 
 </template>
 
 <script>
+import InspectionReportFormBreastCancer from "@/components/form/inspection-report-form-breast-cancer";
+import InspectionReportFormThyroidCancer from "@/components/form/inspection-report-form-thyroid-cancer";
+import InspectionReportFormMastitis from "@/components/form/inspection-report-form-mastitis";
+import MyButton from "@/components/my/my-button";
+
 export default {
   name: "inspection-report",
+  components: {MyButton, InspectionReportFormMastitis, InspectionReportFormThyroidCancer, InspectionReportFormBreastCancer},
   data() {
-    return {}
+    return {
+      formVisible: false,
+    }
   },
   methods: {},
   mounted() {

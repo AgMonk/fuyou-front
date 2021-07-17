@@ -1,4 +1,4 @@
-<!--suppress HtmlUnknownTag -->
+
 <template>
   <el-submenu v-if="route.name&&route.children" :index="path">
     <template #title>{{ route.name }}</template>

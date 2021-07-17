@@ -1,4 +1,4 @@
-<!--suppress HtmlUnknownTag -->
+
 <template>
   <el-tag :size="size" :type="type">{{ text }}</el-tag>
 </template>
