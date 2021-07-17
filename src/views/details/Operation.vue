@@ -6,10 +6,10 @@
       <my-button text="添加" tooltip="添加手术记录" @click="formVisible=true;"/>
     </el-header>
     <el-main>
-      <descriptions-breast-cancer v-for="(item,i) in data" v-if="diseaseType==='乳腺癌'" :key="i" :data="item" :recordUuid="recordUuid"
-                                  @updated="findAll"/>
-      <descriptions-thyroid-cancer v-for="(item,i) in data" v-if="diseaseType==='甲状腺癌'" :key="i" :data="item" :recordUuid="recordUuid"
-                                   @updated="findAll"/>
+      <operation-descriptions-breast-cancer v-for="(item,i) in data" v-if="diseaseType==='乳腺癌'" :key="i" :data="item" :recordUuid="recordUuid"
+                                            @updated="findAll"/>
+      <operation-descriptions-thyroid-cancer v-for="(item,i) in data" v-if="diseaseType==='甲状腺癌'" :key="i" :data="item" :recordUuid="recordUuid"
+                                             @updated="findAll"/>
 
       <el-dialog v-model="formVisible" title="手术情况">
         <operation-form-breast-cancer v-if="diseaseType==='乳腺癌'" @submit="submit"/>
@@ -25,12 +25,18 @@
 import MyButton from "@/components/my/my-button";
 import OperationFormBreastCancer from "@/components/form/operation-form-breast-cancer";
 import OperationFormThyroidCancer from "@/components/form/operation-form-thyroid-cancer";
-import DescriptionsBreastCancer from "@/components/descriptions/descriptions-breast-cancer";
-import DescriptionsThyroidCancer from "@/components/descriptions/descriptions-thyroid-cancer";
+import OperationDescriptionsBreastCancer from "@/components/descriptions/operation-descriptions-breast-cancer";
+import OperationDescriptionsThyroidCancer from "@/components/descriptions/operation-descriptions-thyroid-cancer";
 
 export default {
   name: "Operation",
-  components: {DescriptionsThyroidCancer, DescriptionsBreastCancer, OperationFormThyroidCancer, OperationFormBreastCancer, MyButton},
+  components: {
+    OperationDescriptionsThyroidCancer,
+    OperationDescriptionsBreastCancer,
+    OperationFormThyroidCancer,
+    OperationFormBreastCancer,
+    MyButton
+  },
   data() {
     return {
       formVisible: false,

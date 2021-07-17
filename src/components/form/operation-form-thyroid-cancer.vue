@@ -13,34 +13,42 @@
             value-format="X">
         </el-date-picker>
       </el-form-item>
-      <el-form-item label="部位">
-        <el-radio-group v-model="data.surgicalApproach[0]" size="small">
-          <el-radio-button label="左侧"/>
-          <el-radio-button label="右侧"/>
-          <el-radio-button label="双侧"/>
-        </el-radio-group>
-      </el-form-item>
-      <el-form-item label="峡部">
-        <el-radio-group v-model="data.surgicalApproach[1]" size="small">
-          <el-radio-button label="">无</el-radio-button>
-          <el-radio-button label="有"/>
-        </el-radio-group>
-      </el-form-item>
-      <el-form-item label="淋巴结">
-        <el-radio-group v-model="data.surgicalApproach[2]" size="small">
-          <el-radio-button label="">无</el-radio-button>
-          <el-radio-button label="中央区"/>
-          <el-radio-button label="颈侧区"/>
-        </el-radio-group>
-      </el-form-item>
-      <el-form-item label="入路">
-        <el-radio-group v-model="data.surgicalApproach[3]" size="small">
-          <el-radio-button label="经腋窝无充气"/>
-          <el-radio-button label="经胸乳"/>
-          <el-radio-button label="经腋窝"/>
-          <el-radio-button label="开放"/>
-        </el-radio-group>
-      </el-form-item>
+      <el-form inline>
+        <el-form-item label="部位">
+          <el-radio-group v-model="data.surgicalApproach[0]" size="small">
+            <el-radio-button label="左侧"/>
+            <el-radio-button label="右侧"/>
+            <el-radio-button label="双侧"/>
+          </el-radio-group>
+        </el-form-item>
+        <el-form-item label="+ 峡部">
+          <el-radio-group v-model="data.surgicalApproach[1]" size="small">
+            <el-radio-button label="">无</el-radio-button>
+            <el-radio-button label="有"/>
+          </el-radio-group>
+        </el-form-item>
+        <el-form-item label="+ 淋巴结">
+          <el-radio-group v-model="data.surgicalApproach[2]" size="small">
+            <el-radio-button label="">无</el-radio-button>
+            <el-radio-button label="中央区"/>
+            <el-radio-button label="颈侧区"/>
+          </el-radio-group>
+        </el-form-item>
+      </el-form>
+      <el-form inline>
+        <el-form-item label="入路:A、腔镜下" label-width="150px">
+          <el-radio-group v-model="data.surgicalApproach[3]" size="small">
+            <el-radio-button label="经腋窝无充气"/>
+            <el-radio-button label="经胸乳"/>
+            <el-radio-button label="经腋窝"/>
+          </el-radio-group>
+        </el-form-item>
+        <el-form-item label="B、">
+          <el-radio-group v-model="data.surgicalApproach[3]" size="small">
+            <el-radio-button label="开放"/>
+          </el-radio-group>
+        </el-form-item>
+      </el-form>
 
     </el-form>
     <el-form>
@@ -61,7 +69,7 @@
         </el-col>
         <el-col :span="12">
           <el-form-item label="肿瘤直径(cm)">
-            <el-input v-model="data.detail.MACIS.diameter"
+            <el-input v-model.number="data.detail.MACIS.diameter"
                       show-input
                       type="number">
             </el-input>

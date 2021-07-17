@@ -6,18 +6,18 @@
       <my-button text="添加" @click="dialogShow=true"/>
     </el-header>
     <el-main>
-      <el-form inline label-width="100px" size="small">
+      <el-form :model="params.page.condition" inline label-width="100px" size="small">
         <h4>过滤条件</h4>
-        <el-form-item label="住院号">
+        <el-form-item label="住院号" prop="uuid">
           <el-input v-model="params.page.condition.uuid" clearable placeholder="住院号" @change="page"/>
         </el-form-item>
-        <el-form-item label="患者姓名">
+        <el-form-item label="患者姓名" prop="uuid">
           <el-input v-model="params.page.condition.patientName" clearable placeholder="患者姓名" @change="page"/>
         </el-form-item>
-        <el-form-item label="主管医生">
+        <el-form-item label="主管医生" prop="uuid">
           <el-input v-model="params.page.condition.doctorInCharge" clearable placeholder="主管医生" @change="page"/>
         </el-form-item>
-        <el-form-item label="下次复诊">
+        <el-form-item label="下次复诊" prop="uuid">
           <el-date-picker
               v-model="params.page.condition.nextReview.timestamp"
               format="YYYY 年 MM 月 DD 日"
@@ -27,7 +27,7 @@
               @change="page">
           </el-date-picker>
         </el-form-item>
-        <el-form-item label="复查状态">
+        <el-form-item label="复查状态" prop="uuid">
           <el-select v-model="params.page.condition.reviewStatus" placeholder="复查状态" style="width:100%" @change="page">
             <el-option label="不选择" value=""/>
             <el-option value="无需通知"/>
@@ -50,34 +50,34 @@
                 @cell-click="cellClick"
 
       >
-        <el-table-column label="详情" type="expand">
-          <template #default="props">
-            <el-form inline>
-              <el-form-item label="入院日期">{{ props.row.regDate.date }}</el-form-item>
-              <el-form-item v-if="props.row.leaveHospital" label="出院日期">{{ props.row.leaveHospital.date }}</el-form-item>
-            </el-form>
-            <el-form inline>
-              <el-form-item label="主管医生">{{ props.row.doctorInCharge }}</el-form-item>
-              <el-form-item label="病史">{{ props.row.medicalHistory }}</el-form-item>
-            </el-form>
-            <el-form inline>
-              <el-form-item v-if="props.row.lastNotice" label="上次通知">{{ props.row.lastNotice.timeString }}</el-form-item>
-              <el-form-item v-if="props.row.lastSignIn" label="上次签到">{{ props.row.lastSignIn.timeString }}</el-form-item>
-            </el-form>
-            <el-form v-if="props.row.contactName" inline>
-              <el-form-item label="联系人">{{ props.row.contactName }}</el-form-item>
-              <el-form-item label="联系人电话">
-                <my-phone-number :is-link="true" :phone-number="props.row.contactPhone"/>
-              </el-form-item>
-            </el-form>
-            <el-form inline>
-              <el-form-item label="入档时间">{{ props.row.recordTimestamp.timeString }}</el-form-item>
-            </el-form>
+        <!--        <el-table-column label="详情" type="expand">-->
+        <!--          <template #default="props">-->
+        <!--            <el-form inline>-->
+        <!--              <el-form-item label="入院日期">{{ props.row.regDate.date }}</el-form-item>-->
+        <!--              <el-form-item v-if="props.row.leaveHospital" label="出院日期">{{ props.row.leaveHospital.date }}</el-form-item>-->
+        <!--            </el-form>-->
+        <!--            <el-form inline>-->
+        <!--              <el-form-item label="主管医生">{{ props.row.doctorInCharge }}</el-form-item>-->
+        <!--              <el-form-item label="病史">{{ props.row.medicalHistory }}</el-form-item>-->
+        <!--            </el-form>-->
+        <!--            <el-form inline>-->
+        <!--              <el-form-item v-if="props.row.lastNotice" label="上次通知">{{ props.row.lastNotice.timeString }}</el-form-item>-->
+        <!--              <el-form-item v-if="props.row.lastSignIn" label="上次签到">{{ props.row.lastSignIn.timeString }}</el-form-item>-->
+        <!--            </el-form>-->
+        <!--            <el-form v-if="props.row.contactName" inline>-->
+        <!--              <el-form-item label="联系人">{{ props.row.contactName }}</el-form-item>-->
+        <!--              <el-form-item label="联系人电话">-->
+        <!--                <my-phone-number :is-link="true" :phone-number="props.row.contactPhone"/>-->
+        <!--              </el-form-item>-->
+        <!--            </el-form>-->
+        <!--            <el-form inline>-->
+        <!--              <el-form-item label="入档时间">{{ props.row.recordTimestamp.timeString }}</el-form-item>-->
+        <!--            </el-form>-->
 
-            <my-button v-if="props.row.reviewStatus!=='无需通知'" text="结束随访" type="danger" @click="stopReview(props.row.uuid)"/>
-            <my-button text="删除" type="danger" @click="del(props.row.uuid)"/>
-          </template>
-        </el-table-column>
+        <!--            <my-button v-if="props.row.reviewStatus!=='无需通知'" text="结束随访" type="danger" @click="stopReview(props.row.uuid)"/>-->
+        <!--            <my-button text="删除" type="danger" @click="del(props.row.uuid)"/>-->
+        <!--          </template>-->
+        <!--        </el-table-column>-->
         <el-table-column label="住院号" prop="uuid"/>
         <el-table-column label="疾病类型" prop="diseaseType"/>
         <el-table-column label="姓名" prop="patientName"/>

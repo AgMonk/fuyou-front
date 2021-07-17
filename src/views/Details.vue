@@ -31,10 +31,12 @@
       </el-descriptions>
 
       <el-tabs v-model="activeName" type="card">
+        <el-tab-pane label="检查报告" name="检查报告">
+          <inspection-report :disease-type="record.diseaseType" :record-uuid="uuid"/>
+        </el-tab-pane>
         <el-tab-pane label="手术情况" name="手术情况">
           <operation :disease-type="record.diseaseType" :record-uuid="uuid"/>
         </el-tab-pane>
-        <el-tab-pane label="复诊记录" name="复诊记录">复诊记录</el-tab-pane>
       </el-tabs>
 
     </el-main>
@@ -45,15 +47,16 @@
 
 <script>
 import Operation from "@/views/details/Operation";
+import InspectionReport from "@/views/details/InspectionReport";
 import {functionNotImplement} from "@/assets/js/utils";
 import MyButton from "@/components/my/my-button";
 
 export default {
   name: "Details",
-  components: {MyButton, Operation},
+  components: {MyButton, Operation, InspectionReport},
   data() {
     return {
-      activeName: "手术情况",
+      activeName: "检查报告",
       uuid: this.$route.params.uuid,
       record: {},
     }
