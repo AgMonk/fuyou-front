@@ -33,8 +33,6 @@
         </el-form-item>
       </el-form>
       <my-divider text="详细信息"/>
-
-
       <my-divider>
         <el-checkbox v-model="data.detail.breastUltrasound.show"><b>乳腺彩超</b></el-checkbox>
       </my-divider>
@@ -115,8 +113,6 @@
           <el-input v-model="data.detail.breastMRI.right.description" :input-style="inputStyle" size="mini"/>
         </el-form-item>
       </el-form>
-
-
       <my-divider>
         <el-checkbox v-model="data.detail.pathology.show"><b>病理</b></el-checkbox>
       </my-divider>
@@ -142,8 +138,60 @@
         <el-form-item label="P53">
           <el-input v-model="data.detail.pathology.P53" :input-style="inputStyle" class="breastUltrasoundTemplate" size="mini"/>
         </el-form-item>
-
       </el-form>
+      <my-divider>
+        <el-checkbox v-model="data.detail.examination.show"><b>检验</b></el-checkbox>
+      </my-divider>
+      <div v-if="data.detail.examination.show">
+        <el-form inline>
+          <el-form-item label="血常规">
+            <el-input v-model="data.detail.examination.bloodRoutine" class="breastUltrasoundTemplate" size="mini" style="width: 90px"/>
+          </el-form-item>
+          <el-form-item label="血生化">
+            <el-input v-model="data.detail.examination.bloodChemistry" class="breastUltrasoundTemplate" size="mini" style="width: 90px"/>
+          </el-form-item>
+          <el-form-item label="心肌酶">
+            <el-input v-model="data.detail.examination.myocardialEnzymes" class="breastUltrasoundTemplate" size="mini" style="width: 90px"/>
+          </el-form-item>
+          <el-form-item label="血糖">
+            <el-input v-model="data.detail.examination.bloodSugar" class="breastUltrasoundTemplate" size="mini" style="width: 90px"/>
+          </el-form-item>
+          <el-form-item label="血脂">
+            <el-input v-model="data.detail.examination.bloodLipids" class="breastUltrasoundTemplate" size="mini" style="width: 90px"/>
+          </el-form-item>
+          <el-form-item label="碱性磷酸酶">
+            <el-input v-model="data.detail.examination.alkalinePhosphatase" class="breastUltrasoundTemplate" size="mini" style="width: 90px"/>
+          </el-form-item>
+          <el-form-item label="性激素六项">
+            <el-input v-model="data.detail.examination.sexHormones" class="breastUltrasoundTemplate" size="mini" style="width: 90px"/>
+          </el-form-item>
+          <el-form-item label="肝肾功电解质">
+            <el-input v-model="data.detail.examination.electrolyte" class="breastUltrasoundTemplate" size="mini" style="width: 90px"/>
+          </el-form-item>
+          <el-form-item label="其他">
+            <el-input v-model="data.detail.examination.other" class="breastUltrasoundTemplate" size="mini" style="width: 150px"/>
+          </el-form-item>
+
+        </el-form>
+        <el-form inline>
+          肿瘤标记物
+          <el-form-item label="AFP">
+            <el-input v-model="data.detail.examination.tumorMarkers.AFP" :input-style="inputStyle" class="breastUltrasoundTemplate" size="mini"/>
+          </el-form-item>
+          <el-form-item label="CEA">
+            <el-input v-model="data.detail.examination.tumorMarkers.CEA" :input-style="inputStyle" class="breastUltrasoundTemplate" size="mini"/>
+          </el-form-item>
+          <el-form-item label="CA199">
+            <el-input v-model="data.detail.examination.tumorMarkers.CA199" :input-style="inputStyle" class="breastUltrasoundTemplate" size="mini"/>
+          </el-form-item>
+          <el-form-item label="CA125">
+            <el-input v-model="data.detail.examination.tumorMarkers.CA125" :input-style="inputStyle" class="breastUltrasoundTemplate" size="mini"/>
+          </el-form-item>
+          <el-form-item label="CA153">
+            <el-input v-model="data.detail.examination.tumorMarkers.CA153" :input-style="inputStyle" class="breastUltrasoundTemplate" size="mini"/>
+          </el-form-item>
+        </el-form>
+      </div>
 
 
       <el-form>
@@ -222,7 +270,37 @@ export default {
             ki67: "",
             AR: "",
             P53: "",
-          }
+          },
+          //检验
+          examination: {
+            show: true,
+            //血常规
+            bloodRoutine: "正常",
+            //血生化
+            bloodChemistry: "正常",
+            //  心肌酶
+            myocardialEnzymes: "正常",
+            //血糖
+            bloodSugar: "正常",
+            //血脂
+            bloodLipids: "正常",
+            //碱性磷酸酶
+            alkalinePhosphatase: "正常",
+            //性激素六项
+            sexHormones: "正常",
+            //肝肾功电解质
+            electrolyte: "正常",
+            // 其他
+            other: "",
+            // 肿瘤标记物
+            tumorMarkers: {
+              AFP: "",
+              CEA: "",
+              CA199: "",
+              CA125: "",
+              CA153: "",
+            }
+          },
 
         }
       }
