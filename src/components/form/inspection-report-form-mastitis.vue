@@ -226,7 +226,7 @@ export default {
           antinuclearAntibodyProfile: "",
           //肝功能
           liverFunction: "正常",
-
+          // 免疫系统检查(免疫五项)
           immuneSystemExamination: {
             show: false,
             immunoglobulinA: undefined,

@@ -43,6 +43,14 @@
         <el-descriptions-item label="血糖">{{ data.detail.laboratoryExamination.bloodSugar }} mmol/L</el-descriptions-item>
         <el-descriptions-item label="CRP">{{ data.detail.laboratoryExamination.CRP }} mg/L</el-descriptions-item>
       </el-descriptions>
+      <el-descriptions v-if="data.detail.immuneSystemExamination&&data.detail.immuneSystemExamination.show" :column="3" border
+                       title="免疫系统检查(免疫五项)">
+        <el-descriptions-item label="免疫球蛋白A">{{ data.detail.immuneSystemExamination.immunoglobulinA }} g/L</el-descriptions-item>
+        <el-descriptions-item label="免疫球蛋白G">{{ data.detail.immuneSystemExamination.immunoglobulinG }} g/L</el-descriptions-item>
+        <el-descriptions-item label="免疫球蛋白M">{{ data.detail.immuneSystemExamination.immunoglobulinM }} g/L</el-descriptions-item>
+        <el-descriptions-item label="补体C3">{{ data.detail.immuneSystemExamination.complementC3 }} g/L</el-descriptions-item>
+        <el-descriptions-item label="补体C4">{{ data.detail.immuneSystemExamination.complementC4 }} g/L</el-descriptions-item>
+      </el-descriptions>
       <el-dialog v-model="formVisible" title="手术情况">
         <inspection-report-form-mastitis :importData="data" @submit="submit"/>
       </el-dialog>
@@ -100,7 +108,7 @@ export default {
           antinuclearAntibodyProfile: "",
           //肝功能
           liverFunction: "正常",
-
+          // 免疫系统检查(免疫五项)
           immuneSystemExamination: {
             show: false,
             immunoglobulinA: undefined,
