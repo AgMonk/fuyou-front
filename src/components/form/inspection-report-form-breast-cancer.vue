@@ -192,8 +192,59 @@
           </el-form-item>
         </el-form>
       </div>
+      <my-divider>
+        <el-checkbox v-model="data.detail.checking.show"><b>检查</b></el-checkbox>
+      </my-divider>
+      <div v-if="data.detail.checking.show">
+        <el-form inline>
+          <el-form-item label="胸片">
+            <el-input v-model="data.detail.checking.chestRadiograph" class="breastUltrasoundTemplate" size="mini" style="width: 90px"/>
+          </el-form-item>
+          <el-form-item label="心电图">
+            <el-input v-model="data.detail.checking.electrocardiogram" class="breastUltrasoundTemplate" size="mini" style="width: 90px"/>
+          </el-form-item>
+          <el-form-item label="PETCT/ECT">
+            <el-input v-model="data.detail.checking.PETCT_ECT" class="breastUltrasoundTemplate" size="mini" style="width: 150px"/>
+          </el-form-item>
+        </el-form>
+        <el-form inline>
+          <el-form-item label="CT">
+            <div>
+              胸部:
+              <el-input v-model="data.detail.checking.CT.chest" class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
+            </div>
+            <div>
+              头颅:
+              <el-input v-model="data.detail.checking.CT.head" class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
+            </div>
+            <div>
+              上腹部:
+              <el-input v-model="data.detail.checking.CT.upperAbdomen" class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
+            </div>
+            <div>
+              盆腔:
+              <el-input v-model="data.detail.checking.CT.pelvicCavity" class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
+            </div>
+          </el-form-item>
+          <el-form-item label="MRI">
+            <div>
+              胸椎:
+              <el-input v-model="data.detail.checking.MRI.thoracic" class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
+            </div>
+            <div>
+              腰椎:
+              <el-input v-model="data.detail.checking.MRI.lumbarSpine" class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
+            </div>
+            <div>
+              骨盆:
+              <el-input v-model="data.detail.checking.MRI.pelvis" class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
+            </div>
 
+          </el-form-item>
 
+        </el-form>
+
+      </div>
       <el-form>
         <el-form-item label-width="0">
           <my-button text="提交" @click="$emit(`submit`,data)"/>
@@ -301,7 +352,28 @@ export default {
               CA153: "",
             }
           },
-
+          //检查
+          checking: {
+            //胸片
+            chestRadiograph: "正常",
+            // 心电图
+            electrocardiogram: "正常",
+            PETCT_ECT: "正常",
+            CT: {
+              chest: "",
+              head: "",
+              upperAbdomen: "",
+              pelvicCavity: "",
+            },
+            MRI: {
+              //胸椎
+              thoracic: "",
+              //腰椎
+              lumbarSpine: "",
+              //骨盆
+              pelvis: "",
+            },
+          },
         }
       }
     }

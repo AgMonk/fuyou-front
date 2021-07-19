@@ -9,7 +9,7 @@
       <el-collapse v-model="activeName" accordion>
         <el-collapse-item v-for="(item,i) in data" :key="i" :name="i">
           <template #title>{{ item.timestamp.date }} : {{ item.doctorName }}</template>
-          <inspection-report-description-mastitis :data="item" :record-uuid="recordUuid"/>
+          <inspection-report-description-mastitis v-if="diseaseType==='非哺乳期乳腺炎'" :data="item" :record-uuid="recordUuid"/>
         </el-collapse-item>
       </el-collapse>
 
