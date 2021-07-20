@@ -484,7 +484,7 @@ export default {
           //彩超
           ultrasound: {
             show: false,
-            //乳腺
+            // 乳腺
             breast: "",
             //  甲状腺
             thyroid: "",
@@ -510,10 +510,12 @@ export default {
               medicine: [],
               OFS: "",
             },
+            //规律服药
             medicine: {
               status: "",
               sideEffect: "",
             },
+            //靶向治疗
             targetedTherapy: {
               status: "",
               sideEffect: "",
