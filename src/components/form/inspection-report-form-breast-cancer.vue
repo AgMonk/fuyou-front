@@ -32,7 +32,9 @@
           <el-input v-model="data.description" placeholder="查体"/>
         </el-form-item>
       </el-form>
-      <my-divider text="详细信息"/>
+      <my-divider>
+        <b style="font-size: 120%">详细信息</b>
+      </my-divider>
       <my-divider>
         <el-checkbox v-model="data.detail.breastUltrasound.show"><b>乳腺彩超</b></el-checkbox>
       </my-divider>
@@ -243,8 +245,99 @@
           </el-form-item>
 
         </el-form>
-
       </div>
+      <my-divider>
+        <el-checkbox v-model="data.detail.ultrasound.show"><b>彩超</b></el-checkbox>
+      </my-divider>
+      <div v-if="data.detail.ultrasound.show">
+        <el-form inline>
+          <el-form-item label="乳腺">
+            <el-input v-model="data.detail.ultrasound.breast"
+                      class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
+          </el-form-item>
+          <el-form-item label="甲状腺">
+            <el-input v-model="data.detail.ultrasound.thyroid"
+                      class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
+          </el-form-item>
+          <el-form-item label="肝胆胰脾">
+            <el-input v-model="data.detail.ultrasound.viscera"
+                      class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
+          </el-form-item>
+          <el-form-item label="颈部淋巴结">
+            <el-input v-model="data.detail.ultrasound.cervicalLymphNodes"
+                      class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
+          </el-form-item>
+          <el-form-item label="锁骨上下淋巴结">
+            <el-input v-model="data.detail.ultrasound.clavicleLymphNode"
+                      class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
+          </el-form-item>
+          <el-form-item label="妇科">
+            <el-input v-model="data.detail.ultrasound.gynecology"
+                      class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
+          </el-form-item>
+          <el-form-item label="心脏">
+            <el-input v-model="data.detail.ultrasound.heart"
+                      class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
+          </el-form-item>
+          <el-form-item label="其他">
+            <el-input v-model="data.detail.ultrasound.other"
+                      class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
+          </el-form-item>
+
+        </el-form>
+      </div>
+
+      <my-divider>
+        <el-checkbox v-model="data.detail.treatmentStatus.show"><b>治疗情况</b></el-checkbox>
+      </my-divider>
+      <div v-if="data.detail.treatmentStatus.show" style="text-align: left">
+        <el-form>
+          <el-form-item label="乳腺">
+            <el-select v-model="data.detail.treatmentStatus.endocrineTherapy.medicine" allow-create filterable multiple
+                       size="mini">
+              <el-option value="他莫昔芬"/>
+              <el-option value="托瑞米芬"/>
+              <el-option value="依西美坦"/>
+              <el-option value="阿那曲唑"/>
+              <el-option value="来曲唑"/>
+            </el-select>
+            ± OFS：
+            <el-input v-model="data.detail.treatmentStatus.endocrineTherapy.OFS"
+                      class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
+
+          </el-form-item>
+          <el-form-item label="规律服药">
+            <el-input v-model="data.detail.treatmentStatus.medicine.status"
+                      class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
+            副作用：
+            <el-input v-model="data.detail.treatmentStatus.medicine.sideEffect"
+                      class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
+
+          </el-form-item>
+          <el-form-item label="靶向治疗">
+            <el-input v-model="data.detail.treatmentStatus.targetedTherapy.status"
+                      class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
+            副作用：
+            <el-input v-model="data.detail.treatmentStatus.targetedTherapy.sideEffect"
+                      class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
+
+          </el-form-item>
+
+        </el-form>
+      </div>
+
+
+      <el-form>
+        <el-form-item label="诊断">
+          <el-input v-model="data.detail.diagnosis"
+                    class="breastUltrasoundTemplate" size="mini" style="width: 100%"/>
+        </el-form-item>
+        <el-form-item label="处理">
+          <el-input v-model="data.detail.treatment"
+                    class="breastUltrasoundTemplate" size="mini" style="width: 100%"/>
+        </el-form-item>
+
+      </el-form>
       <el-form>
         <el-form-item label-width="0">
           <my-button text="提交" @click="$emit(`submit`,data)"/>
@@ -324,7 +417,7 @@ export default {
           },
           //检验
           examination: {
-            show: true,
+            show: false,
             //血常规
             bloodRoutine: "正常",
             //血生化
@@ -354,6 +447,7 @@ export default {
           },
           //检查
           checking: {
+            show: false,
             //胸片
             chestRadiograph: "正常",
             // 心电图
@@ -374,6 +468,51 @@ export default {
               pelvis: "",
             },
           },
+          //彩超
+          ultrasound: {
+            show: false,
+            //乳腺
+            breast: "",
+            //  甲状腺
+            thyroid: "",
+            //  肝胆胰脾
+            viscera: "",
+            //  颈部淋巴结
+            cervicalLymphNodes: "",
+            //  锁骨上下淋巴结
+            clavicleLymphNode: "",
+            //  妇科
+            gynecology: "",
+            //  心脏
+            heart: "",
+            //  其他
+            other: "",
+          },
+          //治疗情况
+          treatmentStatus: {
+            show: false,
+
+            //内分泌治疗
+            endocrineTherapy: {
+              medicine: [],
+              OFS: "",
+            },
+            medicine: {
+              status: "",
+              sideEffect: "",
+            },
+            targetedTherapy: {
+              status: "",
+              sideEffect: "",
+            },
+
+          },
+
+
+          //  诊断
+          diagnosis: "",
+          //  处理
+          treatment: "",
         }
       }
     }
