@@ -69,6 +69,75 @@
         <el-descriptions-item label="其他">{{ data.detail.examination.other }}</el-descriptions-item>
       </el-descriptions>
 
+      <el-descriptions v-if="data.detail.examination.show" :column="5" border title="肿瘤标记物">
+        <el-descriptions-item label="AFP">{{ data.detail.examination.tumorMarkers.AFP }}</el-descriptions-item>
+        <el-descriptions-item label="CEA">{{ data.detail.examination.tumorMarkers.CEA }}</el-descriptions-item>
+        <el-descriptions-item label="CA199">{{ data.detail.examination.tumorMarkers.CA199 }}</el-descriptions-item>
+        <el-descriptions-item label="CA125">{{ data.detail.examination.tumorMarkers.CA125 }}</el-descriptions-item>
+        <el-descriptions-item label="CA153">{{ data.detail.examination.tumorMarkers.CA153 }}</el-descriptions-item>
+      </el-descriptions>
+
+      <el-descriptions v-if="data.detail.checking.show" :column="3" border title="检查">
+        <el-descriptions-item label="胸片">{{ data.detail.checking.chestRadiograph }}</el-descriptions-item>
+        <el-descriptions-item label="心电图">{{ data.detail.checking.electrocardiogram }}</el-descriptions-item>
+        <el-descriptions-item label="PETCT/ECT">{{ data.detail.checking.PETCT_ECT }}</el-descriptions-item>
+      </el-descriptions>
+      <el-descriptions v-if="data.detail.checking.show" :column="4" border title="CT">
+        <el-descriptions-item label="胸部">{{ data.detail.checking.CT.chest }}</el-descriptions-item>
+        <el-descriptions-item label="头颅">{{ data.detail.checking.CT.head }}</el-descriptions-item>
+        <el-descriptions-item label="上腹部">{{ data.detail.checking.CT.upperAbdomen }}</el-descriptions-item>
+        <el-descriptions-item label="盆腔">{{ data.detail.checking.CT.pelvicCavity }}</el-descriptions-item>
+      </el-descriptions>
+      <el-descriptions v-if="data.detail.checking.show" :column="3" border title="MRI">
+        <el-descriptions-item label="胸椎">{{ data.detail.checking.MRI.thoracic }}</el-descriptions-item>
+        <el-descriptions-item label="腰椎">{{ data.detail.checking.MRI.lumbarSpine }}</el-descriptions-item>
+        <el-descriptions-item label="骨盆">{{ data.detail.checking.MRI.pelvis }}</el-descriptions-item>
+      </el-descriptions>
+
+
+      <el-descriptions v-if="data.detail.ultrasound.show" :column="3" border title="彩超">
+        <el-descriptions-item label="乳腺">{{ data.detail.ultrasound.breast }}</el-descriptions-item>
+        <el-descriptions-item label="甲状腺">{{ data.detail.ultrasound.thyroid }}</el-descriptions-item>
+        <el-descriptions-item label="肝胆胰脾">{{ data.detail.ultrasound.viscera }}</el-descriptions-item>
+        <el-descriptions-item label="颈部淋巴结">{{ data.detail.ultrasound.cervicalLymphNodes }}</el-descriptions-item>
+        <el-descriptions-item label="锁骨上下淋巴结">{{ data.detail.ultrasound.clavicleLymphNode }}</el-descriptions-item>
+        <el-descriptions-item label="妇科">{{ data.detail.ultrasound.gynecology }}</el-descriptions-item>
+        <el-descriptions-item label="心脏">{{ data.detail.ultrasound.heart }}</el-descriptions-item>
+        <el-descriptions-item label="其他">{{ data.detail.ultrasound.other }}</el-descriptions-item>
+
+      </el-descriptions>
+      <el-descriptions v-if="data.detail.treatmentStatus.show" :column="2" border title="治疗情况">
+        <el-descriptions-item label="规律服药">
+          {{ data.detail.treatmentStatus.medicine.status }}
+          <span v-if="data.detail.treatmentStatus.medicine.sideEffect!==``">
+           副作用： {{ data.detail.treatmentStatus.medicine.sideEffect }}
+          </span>
+        </el-descriptions-item>
+        <el-descriptions-item label="靶向治疗">
+          {{ data.detail.treatmentStatus.targetedTherapy.status }}
+          <span v-if="data.detail.treatmentStatus.targetedTherapy.sideEffect!==``">
+           副作用： {{ data.detail.treatmentStatus.targetedTherapy.sideEffect }}
+          </span>
+        </el-descriptions-item>
+
+        <el-descriptions-item label="内分泌治疗">
+          {{ data.detail.treatmentStatus.endocrineTherapy.medicine.join(',') }}
+          <span v-if="data.detail.treatmentStatus.endocrineTherapy.OFS!==``">
+            ± OFS: {{ data.detail.treatmentStatus.endocrineTherapy.OFS }}
+          </span>
+        </el-descriptions-item>
+      </el-descriptions>
+
+      <el-descriptions :column="1" border title="诊断/处理">
+        <el-descriptions-item label="诊断">
+          {{ data.detail.diagnosis }}
+        </el-descriptions-item>
+        <el-descriptions-item label="处理">
+          {{ data.detail.treatment }}
+        </el-descriptions-item>
+
+      </el-descriptions>
+
 
       <el-dialog v-model="formVisible" title="手术情况">
         <inspection-report-form-breast-cancer :importData="data" @submit="submit"/>
