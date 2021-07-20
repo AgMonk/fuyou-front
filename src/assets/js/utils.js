@@ -137,4 +137,6 @@ export const debugLog = (debug, ...params) => {
     }
 }
 
+export const nowSecond = () => "" + Math.floor(new Date().getTime() / 1000)
+
 export const functionNotImplement = () => ElMessage.warning("本功能尚未实现")

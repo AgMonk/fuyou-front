@@ -9,7 +9,8 @@
       <el-collapse v-model="activeName" accordion>
         <el-collapse-item v-for="(item,i) in data" :key="i" :name="i">
           <template #title>{{ item.timestamp.date }} : {{ item.doctorName }}</template>
-          <inspection-report-description-mastitis v-if="diseaseType==='非哺乳期乳腺炎'" :data="item" :record-uuid="recordUuid"/>
+          <inspection-report-description-mastitis v-if="diseaseType==='非哺乳期乳腺炎'" :data="item" :record-uuid="recordUuid" @updated="findAll"/>
+          <inspection-report-description-breast-cancer v-if="diseaseType==='乳腺癌'" :data="item" :record-uuid="recordUuid" @updated="findAll"/>
         </el-collapse-item>
       </el-collapse>
 
@@ -32,10 +33,12 @@ import InspectionReportDescriptionMastitis from "@/components/descriptions/inspe
 import InspectionReportFormBreastCancer from "@/components/form/inspection-report-form-breast-cancer";
 import InspectionReportFormThyroidCancer from "@/components/form/inspection-report-form-thyroid-cancer";
 import InspectionReportFormMastitis from "@/components/form/inspection-report-form-mastitis";
+import InspectionReportDescriptionBreastCancer from "@/components/descriptions/inspection-report-description-breast-cancer";
 
 export default {
   name: "inspection-report",
   components: {
+    InspectionReportDescriptionBreastCancer,
     InspectionReportFormMastitis,
     InspectionReportFormThyroidCancer,
     InspectionReportFormBreastCancer,
@@ -63,6 +66,7 @@ export default {
     findAll() {
       this.$store.dispatch("inspectionReport/findAll", this.recordUuid).then(res => {
         this.data = res.data;
+        console.log(res.data)
       })
     },
   },

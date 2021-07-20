@@ -351,7 +351,7 @@
 </template>
 
 <script>
-import {copyObj} from "@/assets/js/utils";
+import {copyObj, nowSecond} from "@/assets/js/utils";
 import MyButton from "@/components/my/my-button";
 import MyDivider from "@/components/my/my-divider";
 
@@ -383,7 +383,7 @@ export default {
       data: {
         diseaseType: "乳腺癌",
         uuid: undefined,
-        timestamp: {timestamp: undefined},
+        timestamp: {timestamp: nowSecond()},
         doctorName: "",
         description: "",
         detail: {
