@@ -41,11 +41,17 @@
       <div v-if="data.detail.breastUltrasound.show">
         <el-table :data="data.detail.breastUltrasound.data">
           <el-table-column label="侧" prop="side" width="80px"/>
+          <el-table-column label="数量" prop="side" width="80px"/>
           <el-table-column label="距乳头(mm)" prop="distance" width="100px"/>
           <el-table-column label="宽(mm)" prop="width" width="80px"/>
           <el-table-column label="高(mm)" prop="height" width="80px"/>
           <el-table-column label="情况" prop="description"/>
           <el-table-column label="BI-RADS等级" prop="level" width="80px"/>
+          <el-table-column label="移除">
+            <template #default="s">
+              <my-button size="mini" text="-" type="danger" @click="data.detail.breastUltrasound.data.splice(s.$index,1)"/>
+            </template>
+          </el-table-column>
         </el-table>
         <el-form inline>
           <el-form-item>
@@ -55,10 +61,15 @@
             </el-radio-group>
             侧
           </el-form-item>
+          <el-form-item>
+            <el-input v-model="template.breastUltrasound.count" :input-style="inputStyle" class="breastUltrasoundTemplate" size="mini"/>
+            点
+          </el-form-item>
           <el-form-item label="距乳头">
             <el-input v-model="template.breastUltrasound.distance" :input-style="inputStyle" class="breastUltrasoundTemplate" size="mini"/>
             mm
           </el-form-item>
+
           <el-form-item label="宽">
             <el-input v-model="template.breastUltrasound.width" :input-style="inputStyle" class="breastUltrasoundTemplate" size="mini"/>
             mm
@@ -74,7 +85,8 @@
             <el-input v-model="template.breastUltrasound.level" :input-style="inputStyle" class="breastUltrasoundTemplate" size="mini"/>
             级
           </el-form-item>
-          <my-button size="mini" text="+" @click="data.detail.breastUltrasound.data.push(template.breastUltrasound);template.breastUltrasound={}"/>
+          <my-button size="mini" text="+"
+                     @click="data.detail.breastUltrasound.data.push(template.breastUltrasound);template.breastUltrasound={side: `左`, count:1,}"/>
         </el-form>
       </div>
       <my-divider>
@@ -368,6 +380,7 @@ export default {
         //乳腺彩超
         breastUltrasound: {
           side: "左",
+          count: 1,
           //距离
           distance: "",
           //宽
