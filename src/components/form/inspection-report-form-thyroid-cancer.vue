@@ -32,8 +32,35 @@
           <el-input v-model="data.description" placeholder="查体"/>
         </el-form-item>
       </el-form>
-      <my-divider text="详细信息"/>
+      <my-divider>
+        <b style="font-size: 120%">详细信息</b>
+      </my-divider>
 
+      <my-divider>
+        <el-checkbox v-model="data.detail.thyroidFunctionTest.show"><b>甲功测定</b></el-checkbox>
+      </my-divider>
+      <el-form v-if="data.detail.thyroidFunctionTest.show" inline label-width="120px" style="text-align: left">
+      </el-form>
+      <my-divider>
+        <el-checkbox v-model="data.detail.tumorMarkers.show"><b>肿瘤标记物</b></el-checkbox>
+      </my-divider>
+      <el-form v-if="data.detail.tumorMarkers.show" inline label-width="120px" style="text-align: left">
+      </el-form>
+      <my-divider>
+        <el-checkbox v-model="data.detail.treatmentStatus.show"><b>治疗情况</b></el-checkbox>
+      </my-divider>
+      <el-form v-if="data.detail.treatmentStatus.show" inline label-width="120px" style="text-align: left">
+      </el-form>
+      <my-divider>
+        <el-checkbox v-model="data.detail.ultrasound.show"><b>彩超</b></el-checkbox>
+      </my-divider>
+      <el-form v-if="data.detail.ultrasound.show" inline label-width="120px" style="text-align: left">
+      </el-form>
+      <my-divider>
+        <el-checkbox v-model="data.detail.checking.show"><b>检查</b></el-checkbox>
+      </my-divider>
+      <el-form v-if="data.detail.checking.show" inline label-width="120px" style="text-align: left">
+      </el-form>
       <el-form>
         <el-form-item label-width="0">
           <my-button text="提交" @click="$emit(`submit`,data)"/>
@@ -65,6 +92,7 @@ export default {
         detail: {
           //  甲功测定
           thyroidFunctionTest: {
+            show: false,
             T3: "",
             T4: "",
             FT3: "",
@@ -78,6 +106,7 @@ export default {
           },
           // 肿瘤标记物
           tumorMarkers: {
+            show: false,
             Tg: "",
             CEA: "",
             Ct: "",
