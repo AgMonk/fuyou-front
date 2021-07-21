@@ -36,31 +36,164 @@
         <b style="font-size: 120%">详细信息</b>
       </my-divider>
 
-      <my-divider>
-        <el-checkbox v-model="data.detail.thyroidFunctionTest.show"><b>甲功测定</b></el-checkbox>
-      </my-divider>
-      <el-form v-if="data.detail.thyroidFunctionTest.show" inline label-width="120px" style="text-align: left">
-      </el-form>
-      <my-divider>
-        <el-checkbox v-model="data.detail.tumorMarkers.show"><b>肿瘤标记物</b></el-checkbox>
-      </my-divider>
-      <el-form v-if="data.detail.tumorMarkers.show" inline label-width="120px" style="text-align: left">
-      </el-form>
-      <my-divider>
-        <el-checkbox v-model="data.detail.treatmentStatus.show"><b>治疗情况</b></el-checkbox>
-      </my-divider>
-      <el-form v-if="data.detail.treatmentStatus.show" inline label-width="120px" style="text-align: left">
-      </el-form>
-      <my-divider>
-        <el-checkbox v-model="data.detail.ultrasound.show"><b>彩超</b></el-checkbox>
-      </my-divider>
-      <el-form v-if="data.detail.ultrasound.show" inline label-width="120px" style="text-align: left">
-      </el-form>
-      <my-divider>
-        <el-checkbox v-model="data.detail.checking.show"><b>检查</b></el-checkbox>
-      </my-divider>
-      <el-form v-if="data.detail.checking.show" inline label-width="120px" style="text-align: left">
-      </el-form>
+      <divider-form-group :data="data.detail.thyroidFunctionTest" label-width="80px" title="甲功测定">
+        <el-form-item label="T3">
+          <el-input v-model="data.detail.thyroidFunctionTest.T3" size="mini" style="width:80px"/>
+        </el-form-item>
+        <el-form-item label="T4">
+          <el-input v-model="data.detail.thyroidFunctionTest.T4" size="mini" style="width:80px"/>
+        </el-form-item>
+        <el-form-item label="FT3">
+          <el-input v-model="data.detail.thyroidFunctionTest.FT3" size="mini" style="width:80px"/>
+        </el-form-item>
+        <el-form-item label="FT4">
+          <el-input v-model="data.detail.thyroidFunctionTest.FT4" size="mini" style="width:80px"/>
+        </el-form-item>
+        <el-form-item label="TSH">
+          <el-input v-model="data.detail.thyroidFunctionTest.TSH" size="mini" style="width:80px"/>
+        </el-form-item>
+        <el-form-item label="TSAb">
+          <el-input v-model="data.detail.thyroidFunctionTest.TSAb" size="mini" style="width:80px"/>
+        </el-form-item>
+        <el-form-item label="TgAb">
+          <el-input v-model="data.detail.thyroidFunctionTest.TgAb" size="mini" style="width:80px"/>
+        </el-form-item>
+        <el-form-item label="TPO">
+          <el-input v-model="data.detail.thyroidFunctionTest.TPO" size="mini" style="width:80px"/>
+        </el-form-item>
+        <el-form-item label="TPOAb">
+          <el-input v-model="data.detail.thyroidFunctionTest.TPOAb" size="mini" style="width:80px"/>
+        </el-form-item>
+        <el-form-item label="PTH">
+          <el-input v-model="data.detail.thyroidFunctionTest.PTH" size="mini" style="width:80px"/>
+        </el-form-item>
+      </divider-form-group>
+      <divider-form-group :data="data.detail.tumorMarkers" title="肿瘤标记物">
+        <el-form-item label="Tg">
+          <el-input v-model="data.detail.tumorMarkers.Tg" size="mini" style="width:80px"/>
+        </el-form-item>
+        <el-form-item label="CEA">
+          <el-input v-model="data.detail.tumorMarkers.CEA" size="mini" style="width:80px"/>
+        </el-form-item>
+        <el-form-item label="Ct">
+          <el-input v-model="data.detail.tumorMarkers.Ct" size="mini" style="width:80px"/>
+        </el-form-item>
+        <el-form-item label="CA125">
+          <el-input v-model="data.detail.tumorMarkers.CA125" size="mini" style="width:80px"/>
+        </el-form-item>
+        <el-form-item label="CA199">
+          <el-input v-model="data.detail.tumorMarkers.CA199" size="mini" style="width:80px"/>
+        </el-form-item>
+      </divider-form-group>
+      <divider-form-group :data="data.detail.treatmentStatus" title="治疗情况">
+        <el-form-item label="碘131治疗">
+          <el-input v-model="data.detail.treatmentStatus.I131.status"
+                    class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
+          副作用：
+          <el-input v-model="data.detail.treatmentStatus.I131.sideEffect"
+                    class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
+        </el-form-item>
+        <el-form-item label="规律服药">
+          <el-input v-model="data.detail.treatmentStatus.medicine.status"
+                    class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
+          副作用：
+          <el-input v-model="data.detail.treatmentStatus.medicine.sideEffect"
+                    class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
+        </el-form-item>
+        <el-form-item label="内分泌治疗">
+          <el-select v-model="data.detail.treatmentStatus.endocrineTherapy" allow-create filterable multiple>
+            <el-option value="甲状腺素片(国产)"/>
+            <el-option value="优甲乐(进口)"/>
+            <el-option value="钙片"/>
+          </el-select>
+        </el-form-item>
+
+      </divider-form-group>
+      <divider-form-group :data="data.detail.ultrasound" :form-inline="false" title="彩超">
+        <el-form-item label="甲状腺">
+          <div>
+            <span>左叶</span>
+            <el-select v-model="data.detail.ultrasound.thyroid.left.polarity" clearable="" size="mini" style="width:80px;margin-left: 5px">
+              <el-option value="上"/>
+              <el-option value="中"/>
+              <el-option value="下"/>
+            </el-select>
+            极
+            <el-input v-model="data.detail.ultrasound.thyroid.left.width" placeholder="宽" size="mini" style="width:60px;margin-left: 5px"/>
+            X
+            <el-input v-model="data.detail.ultrasound.thyroid.left.height" placeholder="高" size="mini" style="width:60px;margin-left: 5px"/>
+            <el-input v-model="data.detail.ultrasound.thyroid.left.description" placeholder="情况" size="mini" style="width:120px;margin-left: 5px"/>
+            TI-RADS
+            <el-input v-model="data.detail.ultrasound.thyroid.left.level" size="mini" style="width:40px;margin-left: 5px"/>
+            级
+          </div>
+          <div>
+            <span>右叶</span>
+            <el-select v-model="data.detail.ultrasound.thyroid.right.polarity" clearable="" size="mini" style="width:80px;margin-left: 5px">
+              <el-option value="上"/>
+              <el-option value="中"/>
+              <el-option value="下"/>
+            </el-select>
+            极
+            <el-input v-model="data.detail.ultrasound.thyroid.right.width" placeholder="宽" size="mini" style="width:60px;margin-left: 5px"/>
+            X
+            <el-input v-model="data.detail.ultrasound.thyroid.right.height" placeholder="高" size="mini" style="width:60px;margin-left: 5px"/>
+            <el-input v-model="data.detail.ultrasound.thyroid.right.description" placeholder="情况" size="mini" style="width:120px;margin-left: 5px"/>
+            TI-RADS
+            <el-input v-model="data.detail.ultrasound.thyroid.right.level" size="mini" style="width:40px;margin-left: 5px"/>
+            级
+          </div>
+        </el-form-item>
+        <el-form-item label="乳腺">
+          <el-input v-model="data.detail.ultrasound.breast" size="mini"/>
+        </el-form-item>
+        <el-form-item label="肝胆胰脾">
+          <el-input v-model="data.detail.ultrasound.viscera" size="mini"/>
+        </el-form-item>
+        <el-form-item label="颈部淋巴结">
+          <el-input v-model="data.detail.ultrasound.cervicalLymphNodes" size="mini"/>
+        </el-form-item>
+        <el-form-item label="锁骨上下淋巴结">
+          <el-input v-model="data.detail.ultrasound.clavicleLymphNode" size="mini"/>
+        </el-form-item>
+        <el-form-item label="妇科">
+          <el-input v-model="data.detail.ultrasound.gynecology" size="mini"/>
+        </el-form-item>
+        <el-form-item label="心脏">
+          <el-input v-model="data.detail.ultrasound.heart" size="mini"/>
+        </el-form-item>
+        <el-form-item label="其他">
+          <el-input v-model="data.detail.ultrasound.other" size="mini"/>
+        </el-form-item>
+      </divider-form-group>
+      <divider-form-group :data="data.detail.checking" title="检查">
+        <el-form-item label="心率">
+          <el-input v-model="data.detail.checking.heartRate" size="mini" style="width:60px;"/>
+          次/分
+        </el-form-item>
+        <el-form-item label="颈部CT">
+          <el-input v-model="data.detail.checking.neckCT" size="mini"/>
+        </el-form-item>
+        <el-form-item label="血常规">
+          <el-input v-model="data.detail.checking.bloodRoutine" size="mini"/>
+        </el-form-item>
+        <el-form-item label="电解质">
+          <el-input v-model="data.detail.checking.electrolyte" size="mini"/>
+        </el-form-item>
+        <el-form-item label="胸片">
+          <el-input v-model="data.detail.checking.chestRadiograph" size="mini"/>
+        </el-form-item>
+        <el-form-item label="心电图">
+          <el-input v-model="data.detail.checking.electrocardiogram" size="mini"/>
+        </el-form-item>
+        <el-form-item label="骨密度">
+          <el-input v-model="data.detail.checking.boneDensity" size="mini"/>
+        </el-form-item>
+        <el-form-item label="其他">
+          <el-input v-model="data.detail.checking.other" size="mini"/>
+        </el-form-item>
+      </divider-form-group>
+
       <el-form>
         <el-form-item label-width="0">
           <my-button text="提交" @click="$emit(`submit`,data)"/>
@@ -77,10 +210,11 @@
 import {copyObj} from "@/assets/js/utils";
 import MyButton from "@/components/my/my-button";
 import MyDivider from "@/components/my/my-divider";
+import DividerFormGroup from "@/components/form/divider-form-group";
 
 export default {
   name: "inspection-report-form-thyroid-cancer",
-  components: {MyDivider, MyButton},
+  components: {DividerFormGroup, MyDivider, MyButton},
   data() {
     return {
       data: {
@@ -117,23 +251,21 @@ export default {
           treatmentStatus: {
             show: false,
             //碘131治疗
-            I131: {},
-            //内分泌治疗
-            endocrineTherapy: {
-              medicine: [],
-              OFS: "",
+            I131: {
+              status: "",
+              sideEffect: "",
             },
             //规律服药
             medicine: {
               status: "",
               sideEffect: "",
             },
+            //内分泌治疗
+            endocrineTherapy: [],
           },
           //彩超
           ultrasound: {
             show: false,
-            // 乳腺
-            breast: "",
             //  甲状腺
             thyroid: {
               left: {
@@ -161,6 +293,8 @@ export default {
                 level: "",
               },
             },
+            // 乳腺
+            breast: "",
             //  肝胆胰脾
             viscera: "",
             //  颈部淋巴结

@@ -304,7 +304,7 @@
       </my-divider>
       <div v-if="data.detail.treatmentStatus.show" style="text-align: left">
         <el-form>
-          <el-form-item label="乳腺">
+          <el-form-item label="内分泌治疗">
             <el-select v-model="data.detail.treatmentStatus.endocrineTherapy.medicine" allow-create filterable multiple
                        size="mini">
               <el-option value="他莫昔芬"/>
