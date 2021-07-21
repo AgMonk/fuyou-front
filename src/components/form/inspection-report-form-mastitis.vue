@@ -158,6 +158,7 @@
         </el-form-item>
       </el-form>
 
+
       <el-form>
         <el-form-item label="治疗方案">
           <el-input v-model="data.treatment" placeholder="治疗方案"/>
@@ -174,7 +175,7 @@
 </template>
 
 <script>
-import {copyObj} from "@/assets/js/utils";
+import {copyObj, nowSecond} from "@/assets/js/utils";
 import MyButton from "@/components/my/my-button";
 import MyDivider from "@/components/my/my-divider";
 
@@ -191,7 +192,7 @@ export default {
       data: {
         diseaseType: "非哺乳期乳腺炎",
         uuid: undefined,
-        timestamp: {timestamp: undefined},
+        timestamp: {timestamp: nowSecond()},
         doctorName: "",
         description: "",
         detail: {

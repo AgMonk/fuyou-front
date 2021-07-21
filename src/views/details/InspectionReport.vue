@@ -11,6 +11,7 @@
           <template #title>{{ item.timestamp.date }} : {{ item.doctorName }}</template>
           <inspection-report-description-mastitis v-if="diseaseType==='非哺乳期乳腺炎'" :data="item" :record-uuid="recordUuid" @updated="findAll"/>
           <inspection-report-description-breast-cancer v-if="diseaseType==='乳腺癌'" :data="item" :record-uuid="recordUuid" @updated="findAll"/>
+          <inspection-report-description-thyroid-cancer v-if="diseaseType==='甲状腺癌'" :data="item" :record-uuid="recordUuid" @updated="findAll"/>
         </el-collapse-item>
       </el-collapse>
 
@@ -34,10 +35,12 @@ import InspectionReportFormBreastCancer from "@/components/form/inspection-repor
 import InspectionReportFormThyroidCancer from "@/components/form/inspection-report-form-thyroid-cancer";
 import InspectionReportFormMastitis from "@/components/form/inspection-report-form-mastitis";
 import InspectionReportDescriptionBreastCancer from "@/components/descriptions/inspection-report-description-breast-cancer";
+import InspectionReportDescriptionThyroidCancer from "@/components/descriptions/inspection-report-description-thyroid-cancer";
 
 export default {
   name: "inspection-report",
   components: {
+    InspectionReportDescriptionThyroidCancer,
     InspectionReportDescriptionBreastCancer,
     InspectionReportFormMastitis,
     InspectionReportFormThyroidCancer,

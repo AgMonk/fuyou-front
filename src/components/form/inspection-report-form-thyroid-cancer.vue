@@ -193,7 +193,16 @@
           <el-input v-model="data.detail.checking.other" size="mini"/>
         </el-form-item>
       </divider-form-group>
-
+      <el-form>
+        <el-form-item label="诊断">
+          <el-input v-model="data.detail.diagnosis"
+                    class="breastUltrasoundTemplate" size="mini" style="width: 100%"/>
+        </el-form-item>
+        <el-form-item label="处理">
+          <el-input v-model="data.detail.treatment"
+                    class="breastUltrasoundTemplate" size="mini" style="width: 100%"/>
+        </el-form-item>
+      </el-form>
       <el-form>
         <el-form-item label-width="0">
           <my-button text="提交" @click="$emit(`submit`,data)"/>
@@ -207,7 +216,7 @@
 </template>
 
 <script>
-import {copyObj} from "@/assets/js/utils";
+import {copyObj, nowSecond} from "@/assets/js/utils";
 import MyButton from "@/components/my/my-button";
 import MyDivider from "@/components/my/my-divider";
 import DividerFormGroup from "@/components/form/divider-form-group";
@@ -220,7 +229,7 @@ export default {
       data: {
         diseaseType: "甲状腺癌",
         uuid: undefined,
-        timestamp: {timestamp: undefined},
+        timestamp: {timestamp: nowSecond()},
         doctorName: "",
         description: "",
         detail: {
