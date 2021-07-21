@@ -62,7 +62,114 @@ export default {
         timestamp: {timestamp: undefined},
         doctorName: "",
         description: "",
-        detail: {}
+        detail: {
+          //  甲功测定
+          thyroidFunctionTest: {
+            T3: "",
+            T4: "",
+            FT3: "",
+            FT4: "",
+            TSH: "",
+            TSAb: "",
+            TgAb: "",
+            TPO: "",
+            TPOAb: "",
+            PTH: "",
+          },
+          // 肿瘤标记物
+          tumorMarkers: {
+            Tg: "",
+            CEA: "",
+            Ct: "",
+            CA125: "",
+            CA199: "",
+          },
+          //治疗情况
+          treatmentStatus: {
+            show: false,
+            //碘131治疗
+            I131: {},
+            //内分泌治疗
+            endocrineTherapy: {
+              medicine: [],
+              OFS: "",
+            },
+            //规律服药
+            medicine: {
+              status: "",
+              sideEffect: "",
+            },
+          },
+          //彩超
+          ultrasound: {
+            show: false,
+            // 乳腺
+            breast: "",
+            //  甲状腺
+            thyroid: {
+              left: {
+                //  极
+                polarity: "",
+                //宽
+                width: "",
+                //高
+                height: "",
+                //情况
+                description: "",
+                // 等级
+                level: "",
+              },
+              right: {
+                //  极
+                polarity: "",
+                //宽
+                width: "",
+                //高
+                height: "",
+                //情况
+                description: "",
+                // 等级
+                level: "",
+              },
+            },
+            //  肝胆胰脾
+            viscera: "",
+            //  颈部淋巴结
+            cervicalLymphNodes: "",
+            //  锁骨上下淋巴结
+            clavicleLymphNode: "",
+            //  妇科
+            gynecology: "",
+            //  心脏
+            heart: "",
+            //  其他
+            other: "",
+          },
+          //检查
+          checking: {
+            show: false,
+            //心率
+            heartRate: "",
+            //  颈部CT
+            neckCT: "",
+            //  血常规
+            bloodRoutine: "",
+            //  电解质
+            electrolyte: "",
+            //  胸片
+            chestRadiograph: "",
+            //  心电图
+            electrocardiogram: "",
+            //骨密度
+            boneDensity: "",
+            //  其他
+            other: "",
+          },
+          //  诊断
+          diagnosis: "",
+          //  处理
+          treatment: "",
+        }
       }
     }
   },
