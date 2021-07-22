@@ -36,9 +36,10 @@
     </el-form-item>
     <el-form-item label="出生日期" required>
       <el-date-picker
-          v-model="data.birthday"
+          v-model="data.birthday.timestamp"
           format="YYYY 年 MM 月"
           placeholder="出生日期"
+          value-format="X"
           type="month">
       </el-date-picker>
     </el-form-item>
@@ -46,17 +47,19 @@
   <el-form inline label-width="80px">
     <el-form-item label="入院日期" required>
       <el-date-picker
-          v-model="data.regDate"
+          v-model="data.regDate.timestamp"
           format="YYYY 年 MM 月 DD 日"
           placeholder="入院日期"
+          value-format="X"
           type="date">
       </el-date-picker>
     </el-form-item>
     <el-form-item label="出院日期">
       <el-date-picker
-          v-model="data.leaveHospital"
+          v-model="data.leaveHospital.timestamp"
           format="YYYY 年 MM 月 DD 日"
           placeholder="出院日期"
+          value-format="X"
           type="date">
       </el-date-picker>
     </el-form-item>
@@ -108,15 +111,15 @@ let defaultData = {
   phone: "",
   gender: "女",
   medicalHistory: "",
-  birthday: undefined,
-  regDate: new Date(),
+  regDate: {timestamp: ""},
+  birthday: {timestamp: ""},
   contactName: "",
   contactPhone: "",
   diseaseType: "",
 
   //  复查相关字段
+  leaveHospital: {timestamp: ""},
   reviewStatus: "无需通知",
-  leaveHospital: undefined,
   reviewInterval: 15,
 }
 
@@ -125,7 +128,7 @@ export default {
   components: {MyButton},
   data() {
     return {
-      data: defaultData
+      data: copyObj(this.importData),
     }
   },
   emits: ["submit"],
@@ -138,27 +141,16 @@ export default {
     },
     submit() {
       let data = Object.assign({}, this.data)
-      let date2Time = (data, field) => {
-        data[field] = data[field] ? {timestamp: Math.floor(data[field].getTime() / 1000)} : undefined
-      }
-      date2Time(data, "birthday")
-      date2Time(data, "regDate")
-      date2Time(data, "leaveHospital")
       this.$emit("submit", data);
       // this.$emit("submit",this.data);
     },
     sync(e) {
+      console.log(e)
       if (!e) {
         this.data = copyObj(defaultData)
         return;
       }
       this.data = copyObj(e)
-      let time2Date = (data, field) => {
-        data[field] = new Date(data[field].timestamp * 1000)
-      }
-      time2Date(this.data, "birthday")
-      time2Date(this.data, "regDate")
-      time2Date(this.data, "leaveHospital")
     }
   },
   mounted() {

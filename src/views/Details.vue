@@ -8,7 +8,7 @@
     <el-main>
       <el-descriptions :column="4" border title="档案信息">
         <template #extra>
-          <my-button text="修改" @click="functionNotImplement"/>
+          <my-button text="修改" @click="dialogShow=true"/>
           <my-button text="删除" type="danger" @click="del(uuid)"/>
         </template>
         <el-descriptions-item label="住院号">{{ record.uuid }}</el-descriptions-item>
@@ -39,6 +39,10 @@
         </el-tab-pane>
       </el-tabs>
 
+
+      <el-dialog v-model="dialogShow" title="修改" width="80%">
+        <record-form :importData="record" @submit="submit"/>
+      </el-dialog>
     </el-main>
     <el-footer></el-footer>
   </el-container>
@@ -50,13 +54,15 @@ import Operation from "@/views/details/Operation";
 import InspectionReport from "@/views/details/InspectionReport";
 import {functionNotImplement} from "@/assets/js/utils";
 import MyButton from "@/components/my/my-button";
+import RecordForm from "@/components/form/record-form";
 
 export default {
   name: "Details",
-  components: {MyButton, Operation, InspectionReport},
+  components: {RecordForm, MyButton, Operation, InspectionReport},
   data() {
     return {
       activeName: "检查报告",
+      dialogShow: false,
       uuid: this.$route.params.uuid,
       record: {},
     }
@@ -70,13 +76,26 @@ export default {
         })
       }
     },
+    submit() {
+      this.$store.dispatch("record/update", this.record).then(() => {
+        this.dialogShow = false;
+        this.importData = undefined;
+        this.getDetails();
+      })
+    },
+    getDetails() {
+      this.$store.dispatch("record/getById", this.uuid).then(res => {
+        if (!res.data.leaveHospital) {
+          res.data.leaveHospital = {timestamp: ""}
+        }
+        this.record = res.data
+      })
+    },
   },
   mounted() {
     // console.log(this.uuid)
 
-    this.$store.dispatch("record/getById", this.uuid).then(res => {
-      this.record = res.data
-    })
+    this.getDetails()
   },
   watch: {},
   props: {},

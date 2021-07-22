@@ -172,8 +172,6 @@ export default {
     },
   },
   mounted() {
-    console.log(this.recordUuid)
-    console.log(this.data)
   },
   watch: {
     "data": {

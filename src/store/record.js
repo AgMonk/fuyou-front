@@ -24,6 +24,13 @@ export default {
             delete state.data[JSON.stringify(data)]
             ElMessage.success(res.message);
         }),
+        update: ({dispatch, commit, state}, data) => request({
+            url: "/Record/update",
+            data
+        }).then(res => {
+            delete state.data[JSON.stringify(data)]
+            ElMessage.success(res.message);
+        }),
         // //优先经过缓存查询
         // get: ({dispatch, commit, state}, data) => {
         //     let d = state.data[JSON.stringify(data)];

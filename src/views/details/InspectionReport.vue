@@ -69,7 +69,6 @@ export default {
     findAll() {
       this.$store.dispatch("inspectionReport/findAll", this.recordUuid).then(res => {
         this.data = res.data;
-        console.log(res.data)
       })
     },
   },
