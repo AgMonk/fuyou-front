@@ -131,7 +131,7 @@
         </el-descriptions-item>
 
       </el-descriptions>
-      <el-dialog v-model="formVisible" title="手术情况">
+      <el-dialog v-model="formVisible" title="修改报告">
         <inspection-report-form-breast-cancer :importData="data" @submit="submit"/>
       </el-dialog>
     </el-main>

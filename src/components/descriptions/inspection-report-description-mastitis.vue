@@ -51,7 +51,7 @@
         <el-descriptions-item label="补体C3">{{ data.detail.immuneSystemExamination.complementC3 }} g/L</el-descriptions-item>
         <el-descriptions-item label="补体C4">{{ data.detail.immuneSystemExamination.complementC4 }} g/L</el-descriptions-item>
       </el-descriptions>
-      <el-dialog v-model="formVisible" title="手术情况">
+      <el-dialog v-model="formVisible" title="修改报告">
         <inspection-report-form-mastitis :importData="data" @submit="submit"/>
       </el-dialog>
     </el-main>
