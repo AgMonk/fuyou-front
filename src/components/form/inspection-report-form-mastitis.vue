@@ -135,12 +135,11 @@
           <el-input v-model="data.detail.laboratoryExamination.CRP" class="numberInput"/>
           mg/L
         </el-form-item>
-
       </divider-form-group>
       <my-divider>
         <b style="font-size: 120%">免疫系统检查</b>
       </my-divider>
-      <divider-form-group :data="data.detail.laboratoryExamination" label-width="80px" title="免疫五项">
+      <divider-form-group :data="data.detail.immuneSystemExamination" label-width="80px" title="免疫五项">
         <el-form-item label="免疫球蛋白A">
           <el-input v-model="data.detail.immuneSystemExamination.immunoglobulinA" class="numberInput" type="number"/>
           g/L
@@ -162,7 +161,6 @@
           g/L
         </el-form-item>
       </divider-form-group>
-
 
       <el-form>
         <el-form-item label="治疗方案">
