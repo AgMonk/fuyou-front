@@ -48,36 +48,8 @@
       </el-pagination>
       <el-table :data="myRecord" stripe
                 @cell-click="cellClick"
-
+                :cell-style="{cursor: `pointer`}"
       >
-        <!--        <el-table-column label="详情" type="expand">-->
-        <!--          <template #default="props">-->
-        <!--            <el-form inline>-->
-        <!--              <el-form-item label="入院日期">{{ props.row.regDate.date }}</el-form-item>-->
-        <!--              <el-form-item v-if="props.row.leaveHospital" label="出院日期">{{ props.row.leaveHospital.date }}</el-form-item>-->
-        <!--            </el-form>-->
-        <!--            <el-form inline>-->
-        <!--              <el-form-item label="主管医生">{{ props.row.doctorInCharge }}</el-form-item>-->
-        <!--              <el-form-item label="病史">{{ props.row.medicalHistory }}</el-form-item>-->
-        <!--            </el-form>-->
-        <!--            <el-form inline>-->
-        <!--              <el-form-item v-if="props.row.lastNotice" label="上次通知">{{ props.row.lastNotice.timeString }}</el-form-item>-->
-        <!--              <el-form-item v-if="props.row.lastSignIn" label="上次签到">{{ props.row.lastSignIn.timeString }}</el-form-item>-->
-        <!--            </el-form>-->
-        <!--            <el-form v-if="props.row.contactName" inline>-->
-        <!--              <el-form-item label="联系人">{{ props.row.contactName }}</el-form-item>-->
-        <!--              <el-form-item label="联系人电话">-->
-        <!--                <my-phone-number :is-link="true" :phone-number="props.row.contactPhone"/>-->
-        <!--              </el-form-item>-->
-        <!--            </el-form>-->
-        <!--            <el-form inline>-->
-        <!--              <el-form-item label="入档时间">{{ props.row.recordTimestamp.timeString }}</el-form-item>-->
-        <!--            </el-form>-->
-
-        <!--            <my-button v-if="props.row.reviewStatus!=='无需通知'" text="结束随访" type="danger" @click="stopReview(props.row.uuid)"/>-->
-        <!--            <my-button text="删除" type="danger" @click="del(props.row.uuid)"/>-->
-        <!--          </template>-->
-        <!--        </el-table-column>-->
         <el-table-column label="住院号" prop="uuid"/>
         <el-table-column label="疾病类型" prop="diseaseType"/>
         <el-table-column label="姓名" prop="patientName"/>
