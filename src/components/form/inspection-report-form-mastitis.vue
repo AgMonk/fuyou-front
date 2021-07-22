@@ -31,22 +31,11 @@
           <el-input v-model="data.description" :autosize="{ minRows: 2, maxRows: 4}" placeholder="体征" type="textarea"/>
         </el-form-item>
       </el-form>
-      <my-divider text="详细信息"/>
-      <el-form label-width="120px">
-        <el-form-item style="text-align: left">
-          <template #label>
-            <el-checkbox v-model="data.detail.invertedNipples.show">乳头内陷</el-checkbox>
-          </template>
-          <span v-if="data.detail.invertedNipples.show" style="margin-left: 20px">
-            左：<el-select v-model="data.detail.invertedNipples.left" style="width:100px">
-            <el-option v-for="(item,i) in options.invertedNipples" :key="i" :value="item"/>
-          </el-select></span>
-          <span v-if="data.detail.invertedNipples.show" style="margin-left: 20px">
-            右：<el-select v-model="data.detail.invertedNipples.right" style="width:100px">
-                <el-option v-for="(item,i) in options.invertedNipples" :key="i" :value="item"/>
-              </el-select></span>
-        </el-form-item>
-      </el-form>
+
+      <my-divider>
+        <b style="font-size: 120%">详细信息</b>
+      </my-divider>
+
       <el-form inline label-width="120px" style="text-align: left">
         <el-form-item label="抗核抗体谱">
           <el-input v-model="data.detail.antinuclearAntibodyProfile"/>
@@ -56,8 +45,23 @@
         </el-form-item>
       </el-form>
 
-      <my-divider text="影像学检查"/>
-      <el-form label-width="120px">
+      <divider-form-group :data="data.detail.invertedNipples" label-width="60px" title="乳头内陷">
+        <el-form-item style="text-align: left">
+          <span v-if="data.detail.invertedNipples.show" style="margin-left: 20px">
+            左：<el-select v-model="data.detail.invertedNipples.left" style="width:100px">
+            <el-option v-for="(item,i) in options.invertedNipples" :key="i" :value="item"/>
+          </el-select></span>
+          <span v-if="data.detail.invertedNipples.show" style="margin-left: 20px">
+            右：<el-select v-model="data.detail.invertedNipples.right" style="width:100px">
+                <el-option v-for="(item,i) in options.invertedNipples" :key="i" :value="item"/>
+              </el-select></span>
+        </el-form-item>
+      </divider-form-group>
+
+      <my-divider>
+        <b style="font-size: 120%">影像学检查</b>
+      </my-divider>
+      <divider-form-group :data="data.detail.breastUltrasound" label-width="80px" title="乳腺彩超">
         <el-form-item label="乳腺彩超">
           <el-row>
             <el-col :span="12" style="text-align: left">
@@ -80,6 +84,8 @@
                       placeholder="检查结果" style="margin-top: 10px" type="textarea"/>
           </el-row>
         </el-form-item>
+      </divider-form-group>
+      <divider-form-group :data="data.detail.mammography" label-width="80px" title="钼靶">
         <el-form-item label="钼靶">
           <el-row>
             <el-col :span="12" style="text-align: left">
@@ -102,9 +108,9 @@
                       placeholder="检查结果" style="margin-top: 10px" type="textarea"/>
           </el-row>
         </el-form-item>
-      </el-form>
-      <my-divider text="实验室检查"/>
-      <el-form inline label-width="120px" style="text-align: left">
+      </divider-form-group>
+
+      <divider-form-group :data="data.detail.laboratoryExamination" label-width="80px" title="实验室检查">
         <el-form-item label="WBC">
           <el-input v-model="data.detail.laboratoryExamination.WBC" class="numberInput" type="number"/>
           ×10<sup>9</sup>/L
@@ -130,12 +136,11 @@
           mg/L
         </el-form-item>
 
-      </el-form>
-
+      </divider-form-group>
       <my-divider>
-        <el-checkbox v-model="data.detail.immuneSystemExamination.show"><b>免疫系统检查(免疫五项)</b></el-checkbox>
+        <b style="font-size: 120%">免疫系统检查</b>
       </my-divider>
-      <el-form v-if="data.detail.immuneSystemExamination.show" inline label-width="120px" style="text-align: left">
+      <divider-form-group :data="data.detail.laboratoryExamination" label-width="80px" title="免疫五项">
         <el-form-item label="免疫球蛋白A">
           <el-input v-model="data.detail.immuneSystemExamination.immunoglobulinA" class="numberInput" type="number"/>
           g/L
@@ -156,7 +161,7 @@
           <el-input v-model="data.detail.immuneSystemExamination.complementC4" class="numberInput" type="number"/>
           g/L
         </el-form-item>
-      </el-form>
+      </divider-form-group>
 
 
       <el-form>
@@ -178,10 +183,11 @@
 import {copyObj, nowSecond} from "@/assets/js/utils";
 import MyButton from "@/components/my/my-button";
 import MyDivider from "@/components/my/my-divider";
+import DividerFormGroup from "@/components/form/divider-form-group";
 
 export default {
   name: "inspection-report-form-mastitis",
-  components: {MyDivider, MyButton},
+  components: {DividerFormGroup, MyDivider, MyButton},
   data() {
     return {
       options: {
@@ -204,18 +210,21 @@ export default {
           },
           //乳腺彩超
           breastUltrasound: {
+            show: false,
             timestamp: undefined,
             location: "本院",
             result: "",
           },
           //钼靶
           mammography: {
+            show: false,
             timestamp: undefined,
             location: "本院",
             result: "",
           },
           //  实验室检查:
           laboratoryExamination: {
+            show: false,
             WBC: undefined,
             N: undefined,
             PRL: undefined,
