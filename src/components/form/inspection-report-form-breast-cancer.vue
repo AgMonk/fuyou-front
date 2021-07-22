@@ -89,10 +89,7 @@
                      @click="data.detail.breastUltrasound.data.push(template.breastUltrasound);template.breastUltrasound={side: `左`, count:1,}"/>
         </el-form>
       </div>
-      <my-divider>
-        <el-checkbox v-model="data.detail.mammography.show"><b>钼靶</b></el-checkbox>
-      </my-divider>
-      <el-form v-if="data.detail.mammography.show" inline>
+      <divider-form-group :data="data.detail.mammography" label-width="90px" title="钼靶">
         <el-form-item label="左 BI-RADS">
           <el-input v-model="data.detail.mammography.left.level" :input-style="inputStyle" class="breastUltrasoundTemplate" size="mini"/>
           级
@@ -107,11 +104,8 @@
         <el-form-item label="情况">
           <el-input v-model="data.detail.mammography.right.description" :input-style="inputStyle" size="mini"/>
         </el-form-item>
-      </el-form>
-      <my-divider>
-        <el-checkbox v-model="data.detail.breastMRI.show"><b>乳腺MRI</b></el-checkbox>
-      </my-divider>
-      <el-form v-if="data.detail.breastMRI.show" inline>
+      </divider-form-group>
+      <divider-form-group :data="data.detail.breastMRI" label-width="90px" title="乳腺MRI">
         <el-form-item label="左 BI-RADS">
           <el-input v-model="data.detail.breastMRI.left.level" :input-style="inputStyle" class="breastUltrasoundTemplate" size="mini"/>
           级
@@ -126,11 +120,8 @@
         <el-form-item label="情况">
           <el-input v-model="data.detail.breastMRI.right.description" :input-style="inputStyle" size="mini"/>
         </el-form-item>
-      </el-form>
-      <my-divider>
-        <el-checkbox v-model="data.detail.pathology.show"><b>病理</b></el-checkbox>
-      </my-divider>
-      <el-form v-if="data.detail.pathology.show" inline>
+      </divider-form-group>
+      <divider-form-group :data="data.detail.pathology" label-width="60px" title="病理">
         <el-form-item label="情况">
           <el-input v-model="data.detail.pathology.description" :input-style="inputStyle" size="mini"/>
         </el-form-item>
@@ -152,11 +143,8 @@
         <el-form-item label="P53">
           <el-input v-model="data.detail.pathology.P53" :input-style="inputStyle" class="breastUltrasoundTemplate" size="mini"/>
         </el-form-item>
-      </el-form>
-      <my-divider>
-        <el-checkbox v-model="data.detail.examination.show"><b>检验</b></el-checkbox>
-      </my-divider>
-      <div v-if="data.detail.examination.show">
+      </divider-form-group>
+      <divider-form-group :data="data.detail.examination" label-width="60px" title="检验">
         <el-form inline>
           <el-form-item label="血常规">
             <el-input v-model="data.detail.examination.bloodRoutine" class="breastUltrasoundTemplate" size="mini" style="width: 90px"/>
@@ -185,7 +173,6 @@
           <el-form-item label="其他">
             <el-input v-model="data.detail.examination.other" class="breastUltrasoundTemplate" size="mini" style="width: 150px"/>
           </el-form-item>
-
         </el-form>
         <el-form inline>
           肿瘤标记物
@@ -205,11 +192,8 @@
             <el-input v-model="data.detail.examination.tumorMarkers.CA153" :input-style="inputStyle" class="breastUltrasoundTemplate" size="mini"/>
           </el-form-item>
         </el-form>
-      </div>
-      <my-divider>
-        <el-checkbox v-model="data.detail.checking.show"><b>检查</b></el-checkbox>
-      </my-divider>
-      <div v-if="data.detail.checking.show">
+      </divider-form-group>
+      <divider-form-group :data="data.detail.checking" label-width="60px" title="检查">
         <el-form inline>
           <el-form-item label="胸片">
             <el-input v-model="data.detail.checking.chestRadiograph" class="breastUltrasoundTemplate" size="mini" style="width: 90px"/>
@@ -257,87 +241,73 @@
           </el-form-item>
 
         </el-form>
-      </div>
-      <my-divider>
-        <el-checkbox v-model="data.detail.ultrasound.show"><b>彩超</b></el-checkbox>
-      </my-divider>
-      <div v-if="data.detail.ultrasound.show">
-        <el-form inline>
-          <el-form-item label="乳腺">
-            <el-input v-model="data.detail.ultrasound.breast"
-                      class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
-          </el-form-item>
-          <el-form-item label="甲状腺">
-            <el-input v-model="data.detail.ultrasound.thyroid"
-                      class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
-          </el-form-item>
-          <el-form-item label="肝胆胰脾">
-            <el-input v-model="data.detail.ultrasound.viscera"
-                      class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
-          </el-form-item>
-          <el-form-item label="颈部淋巴结">
-            <el-input v-model="data.detail.ultrasound.cervicalLymphNodes"
-                      class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
-          </el-form-item>
-          <el-form-item label="锁骨上下淋巴结">
-            <el-input v-model="data.detail.ultrasound.clavicleLymphNode"
-                      class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
-          </el-form-item>
-          <el-form-item label="妇科">
-            <el-input v-model="data.detail.ultrasound.gynecology"
-                      class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
-          </el-form-item>
-          <el-form-item label="心脏">
-            <el-input v-model="data.detail.ultrasound.heart"
-                      class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
-          </el-form-item>
-          <el-form-item label="其他">
-            <el-input v-model="data.detail.ultrasound.other"
-                      class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
-          </el-form-item>
+      </divider-form-group>
+      <divider-form-group :data="data.detail.ultrasound" label-width="80px" title="彩超">
+        <el-form-item label="乳腺">
+          <el-input v-model="data.detail.ultrasound.breast"
+                    class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
+        </el-form-item>
+        <el-form-item label="甲状腺">
+          <el-input v-model="data.detail.ultrasound.thyroid"
+                    class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
+        </el-form-item>
+        <el-form-item label="肝胆胰脾">
+          <el-input v-model="data.detail.ultrasound.viscera"
+                    class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
+        </el-form-item>
+        <el-form-item label="颈部淋巴结">
+          <el-input v-model="data.detail.ultrasound.cervicalLymphNodes"
+                    class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
+        </el-form-item>
+        <el-form-item label="锁骨上下淋巴结">
+          <el-input v-model="data.detail.ultrasound.clavicleLymphNode"
+                    class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
+        </el-form-item>
+        <el-form-item label="妇科">
+          <el-input v-model="data.detail.ultrasound.gynecology"
+                    class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
+        </el-form-item>
+        <el-form-item label="心脏">
+          <el-input v-model="data.detail.ultrasound.heart"
+                    class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
+        </el-form-item>
+        <el-form-item label="其他">
+          <el-input v-model="data.detail.ultrasound.other"
+                    class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
+        </el-form-item>
+      </divider-form-group>
+      <divider-form-group :data="data.detail.treatmentStatus" label-width="100px" title="治疗情况">
+        <el-form-item label="内分泌治疗">
+          <el-select v-model="data.detail.treatmentStatus.endocrineTherapy.medicine" allow-create filterable multiple
+                     size="mini">
+            <el-option value="他莫昔芬"/>
+            <el-option value="托瑞米芬"/>
+            <el-option value="依西美坦"/>
+            <el-option value="阿那曲唑"/>
+            <el-option value="来曲唑"/>
+          </el-select>
+          ± OFS：
+          <el-input v-model="data.detail.treatmentStatus.endocrineTherapy.OFS"
+                    class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
 
-        </el-form>
-      </div>
+        </el-form-item>
+        <el-form-item label="规律服药">
+          <el-input v-model="data.detail.treatmentStatus.medicine.status"
+                    class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
+          副作用：
+          <el-input v-model="data.detail.treatmentStatus.medicine.sideEffect"
+                    class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
 
-      <my-divider>
-        <el-checkbox v-model="data.detail.treatmentStatus.show"><b>治疗情况</b></el-checkbox>
-      </my-divider>
-      <div v-if="data.detail.treatmentStatus.show" style="text-align: left">
-        <el-form>
-          <el-form-item label="内分泌治疗">
-            <el-select v-model="data.detail.treatmentStatus.endocrineTherapy.medicine" allow-create filterable multiple
-                       size="mini">
-              <el-option value="他莫昔芬"/>
-              <el-option value="托瑞米芬"/>
-              <el-option value="依西美坦"/>
-              <el-option value="阿那曲唑"/>
-              <el-option value="来曲唑"/>
-            </el-select>
-            ± OFS：
-            <el-input v-model="data.detail.treatmentStatus.endocrineTherapy.OFS"
-                      class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
+        </el-form-item>
+        <el-form-item label="靶向治疗">
+          <el-input v-model="data.detail.treatmentStatus.targetedTherapy.status"
+                    class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
+          副作用：
+          <el-input v-model="data.detail.treatmentStatus.targetedTherapy.sideEffect"
+                    class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
 
-          </el-form-item>
-          <el-form-item label="规律服药">
-            <el-input v-model="data.detail.treatmentStatus.medicine.status"
-                      class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
-            副作用：
-            <el-input v-model="data.detail.treatmentStatus.medicine.sideEffect"
-                      class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
-
-          </el-form-item>
-          <el-form-item label="靶向治疗">
-            <el-input v-model="data.detail.treatmentStatus.targetedTherapy.status"
-                      class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
-            副作用：
-            <el-input v-model="data.detail.treatmentStatus.targetedTherapy.sideEffect"
-                      class="breastUltrasoundTemplate" size="mini" style="width: 120px"/>
-
-          </el-form-item>
-
-        </el-form>
-      </div>
-
+        </el-form-item>
+      </divider-form-group>
 
       <el-form>
         <el-form-item label="诊断">
@@ -348,7 +318,6 @@
           <el-input v-model="data.detail.treatment"
                     class="breastUltrasoundTemplate" size="mini" style="width: 100%"/>
         </el-form-item>
-
       </el-form>
       <el-form>
         <el-form-item label-width="0">
@@ -366,10 +335,11 @@
 import {copyObj, nowSecond} from "@/assets/js/utils";
 import MyButton from "@/components/my/my-button";
 import MyDivider from "@/components/my/my-divider";
+import DividerFormGroup from "@/components/form/divider-form-group";
 
 export default {
   name: "inspection-report-form-breast-cancer",
-  components: {MyDivider, MyButton},
+  components: {DividerFormGroup, MyDivider, MyButton},
   data() {
     return {
       inputStyle: {

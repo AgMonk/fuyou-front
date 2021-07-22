@@ -85,11 +85,10 @@
 import {functionNotImplement} from "@/assets/js/utils";
 import MyButton from "@/components/my/my-button";
 import InspectionReportFormBreastCancer from "@/components/form/inspection-report-form-breast-cancer";
-import MyDescriptionsItem from "@/components/my/my-descriptions-item";
 
 export default {
   name: "inspection-report-description-thyroid-cancer",
-  components: {MyDescriptionsItem, InspectionReportFormBreastCancer, MyButton},
+  components: {InspectionReportFormBreastCancer, MyButton},
   data() {
     return {
       formVisible: false,
