@@ -10,6 +10,10 @@ export default {
             url: "/Attachment/list",
             params: {reportUuid}
         }),
+        del: ({dispatch, commit, state}, {reportUuid, filename}) => request({
+            url: "/Attachment/del",
+            params: {reportUuid, filename}
+        }),
         method: ({dispatch, commit, state}, payload) => {
 
         },
