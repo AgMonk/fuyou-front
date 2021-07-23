@@ -5,13 +5,13 @@
 
     <el-main>
       <template v-for="(item,i) in srcList" :key="i">
-        <el-badge style="margin-left: 20px;cursor:pointer" type="danger" value="X" @click="del(item)">
-          <el-image
-              :preview-src-list="srcList"
-              :src="item"
-              fit="scale-down"
-              style="width: 100px; height: 100px">
-          </el-image>
+        <el-image
+            :preview-src-list="srcList"
+            :src="item"
+            fit="scale-down"
+            style="width: 100px; height: 100px">
+        </el-image>
+        <el-badge style="margin-right: 20px;cursor:pointer" type="danger" value="X" @click="del(item)">
         </el-badge>
       </template>
 
@@ -56,7 +56,8 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.$store.dispatch("attachment/del", {reportUuid, filename}).then(() => {
+        this.$store.dispatch("attachment/del", {reportUuid, filename}).then(res => {
+          this.$message.success(res.message)
           this.list()
         })
       })
@@ -64,7 +65,6 @@ export default {
     list() {
       this.$store.dispatch("attachment/list", this.reportUuid).then(res => {
         this.srcList = res.data.map(name => `/attachment/${this.reportUuid}/${name}`)
-        console.log(this.srcList)
       })
     }
   },
