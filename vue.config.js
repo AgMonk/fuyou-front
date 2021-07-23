@@ -10,7 +10,12 @@ module.exports = {
                     '^/api': '' //本身的接口地址没有 '/api' 这种通用前缀，所以要rewrite，如果本身有则去掉
                 },
             },
-
+            '/attachment': {
+                target: '/home/fuyou/attachment',
+                pathRewrite: {
+                    '^/attachment': '' //本身的接口地址没有 '/api' 这种通用前缀，所以要rewrite，如果本身有则去掉
+                },
+            }
         }
     },
 

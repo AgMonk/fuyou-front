@@ -4,6 +4,7 @@ echo $image_version;
 git pull --rebase origin master;
 
 name=fuyou-front
+mapDir=/home/fuyou
 
 echo '停止容器运行';
 docker container stop ${name}
@@ -16,7 +17,7 @@ docker build -t ${name} .
 echo '查询所有镜像';
 docker images;
 echo '使用镜像创建容易并运行';
-docker run -p 18888:80 -d --name ${name} ${name}:latest;
+docker run -p 18888:80 -v ${mapDir}:${mapDir} -d --name ${name} ${name}:latest;
 # -v ~/docker-data/house-web/appsettings.json:/app/appsettings.json -v ~/docker-data/house-web/NLogFile/:/app/NLogFile   --restart=always
 docker logs ${name};
 #删除build过程中产生的镜像    #docker image prune -a -f
