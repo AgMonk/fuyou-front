@@ -37,6 +37,9 @@
         <el-tab-pane label="手术情况" name="手术情况">
           <operation :disease-type="record.diseaseType" :record-uuid="uuid"/>
         </el-tab-pane>
+        <el-tab-pane label="附件" name="附件">
+          <Attachment :record-uuid="uuid"/>
+        </el-tab-pane>
       </el-tabs>
 
 
@@ -55,10 +58,11 @@ import InspectionReport from "@/views/details/InspectionReport";
 import {functionNotImplement} from "@/assets/js/utils";
 import MyButton from "@/components/my/my-button";
 import RecordForm from "@/components/form/record-form";
+import Attachment from "@/views/details/Attachment";
 
 export default {
   name: "Details",
-  components: {RecordForm, MyButton, Operation, InspectionReport},
+  components: {Attachment, RecordForm, MyButton, Operation, InspectionReport},
   data() {
     return {
       activeName: "检查报告",
