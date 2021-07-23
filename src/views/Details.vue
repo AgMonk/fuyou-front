@@ -74,6 +74,7 @@ export default {
       if (confirm("删除档案？")) {
         this.$store.dispatch("record/del", uuid).then(res => {
           this.$message.success(res.message)
+          this.$router.push("/record")
         })
       }
     },

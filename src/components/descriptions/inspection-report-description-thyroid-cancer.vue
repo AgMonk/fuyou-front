@@ -74,7 +74,7 @@
 
       </el-descriptions>
       <el-dialog v-model="formVisible" title="修改报告">
-        <inspection-report-form-breast-cancer :importData="data" @submit="submit"/>
+        <inspection-report-form-thyroid-cancer :importData="data" @submit="submit"/>
       </el-dialog>
     </el-main>
   </el-container>
@@ -84,11 +84,11 @@
 <script>
 import {functionNotImplement} from "@/assets/js/utils";
 import MyButton from "@/components/my/my-button";
-import InspectionReportFormBreastCancer from "@/components/form/inspection-report-form-breast-cancer";
+import InspectionReportFormThyroidCancer from "@/components/form/inspection-report-form-thyroid-cancer";
 
 export default {
   name: "inspection-report-description-thyroid-cancer",
-  components: {InspectionReportFormBreastCancer, MyButton},
+  components: {InspectionReportFormThyroidCancer, MyButton},
   data() {
     return {
       formVisible: false,
