@@ -37,9 +37,6 @@
         <el-tab-pane label="手术情况" name="手术情况">
           <operation :disease-type="record.diseaseType" :record-uuid="uuid"/>
         </el-tab-pane>
-        <el-tab-pane label="附件" name="附件">
-          <Attachment :record-uuid="uuid"/>
-        </el-tab-pane>
       </el-tabs>
 
 

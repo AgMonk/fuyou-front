@@ -4,14 +4,18 @@
     <!--  <el-container direction="horizontal">-->
 
     <el-main>
-
+      <el-image
+          :preview-src-list="srcList"
+          :src="srcList[0]"
+          style="width: 100px; height: 100px">
+      </el-image>
 
       <el-upload
-          :data="{recordUuid}"
+          :data="{reportUuid}"
           accept="image/*"
           action="/api/Attachment/upload"
-          class="upload-demo"
           drag
+          :on-success="list"
           multiple>
         <i class="el-icon-upload"></i>
         <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
@@ -32,14 +36,24 @@
 export default {
   name: "Attachment",
   data() {
-    return {}
+    return {
+      srcList: [],
+    }
   },
-  methods: {},
+  methods: {
+    list() {
+      this.$store.dispatch("attachment/list", this.reportUuid).then(res => {
+        this.srcList = res.data.map(name => `/attachment/${this.reportUuid}/${name}`)
+        console.log(this.srcList)
+      })
+    }
+  },
   mounted() {
+    this.list();
   },
   watch: {},
   props: {
-    recordUuid: {required: true, type: String},
+    reportUuid: {required: true, type: String},
   },
 }
 

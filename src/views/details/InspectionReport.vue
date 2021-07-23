@@ -12,6 +12,7 @@
           <inspection-report-description-mastitis v-if="diseaseType==='非哺乳期乳腺炎'" :data="item" :record-uuid="recordUuid" @updated="findAll"/>
           <inspection-report-description-breast-cancer v-if="diseaseType==='乳腺癌'" :data="item" :record-uuid="recordUuid" @updated="findAll"/>
           <inspection-report-description-thyroid-cancer v-if="diseaseType==='甲状腺癌'" :data="item" :record-uuid="recordUuid" @updated="findAll"/>
+          <Attachment :reportUuid="item.uuid"/>
         </el-collapse-item>
       </el-collapse>
 
@@ -36,10 +37,12 @@ import InspectionReportFormThyroidCancer from "@/components/form/inspection-repo
 import InspectionReportFormMastitis from "@/components/form/inspection-report-form-mastitis";
 import InspectionReportDescriptionBreastCancer from "@/components/descriptions/inspection-report-description-breast-cancer";
 import InspectionReportDescriptionThyroidCancer from "@/components/descriptions/inspection-report-description-thyroid-cancer";
+import Attachment from "@/views/details/Attachment";
 
 export default {
   name: "inspection-report",
   components: {
+    Attachment,
     InspectionReportDescriptionThyroidCancer,
     InspectionReportDescriptionBreastCancer,
     InspectionReportFormMastitis,
