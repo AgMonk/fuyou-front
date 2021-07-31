@@ -128,7 +128,7 @@ export default {
   components: {MyButton},
   data() {
     return {
-      data: copyObj(this.importData),
+      data: {},
     }
   },
   emits: ["submit"],
@@ -154,6 +154,7 @@ export default {
     }
   },
   mounted() {
+    this.sync(this.importData)
   },
   watch: {
     "importData": {
