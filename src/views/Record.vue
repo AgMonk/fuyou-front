@@ -1,4 +1,3 @@
-
 <template>
   <el-container direction="vertical">
     <!--  <el-container direction="horizontal">-->
@@ -46,9 +45,9 @@
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange">
       </el-pagination>
-      <el-table :data="myRecord" stripe
+      <el-table :cell-style="{cursor: `pointer`}" :data="myRecord"
+                stripe
                 @cell-click="cellClick"
-                :cell-style="{cursor: `pointer`}"
       >
         <el-table-column label="住院号" prop="uuid"/>
         <el-table-column label="疾病类型" prop="diseaseType"/>
@@ -160,7 +159,7 @@ export default {
   methods: {
     functionNotImplement,
     cellClick(row, column, cell, event) {
-      if (column.property !== 'operating') {
+      if (column.property !== 'operating' && column.property !== 'phone') {
         this.$router.push("/detail/" + row.uuid)
       }
     },

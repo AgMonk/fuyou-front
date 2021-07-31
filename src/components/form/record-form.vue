@@ -86,12 +86,15 @@
     <el-form-item label="复诊间隔">
       <el-input v-model="data.reviewInterval" placeholder="复诊间隔" type="number"/>
     </el-form-item>
+    <div>
+      <el-form-item label="病史" required>
+        <el-input v-model="data.medicalHistory" autosize placeholder="病史" style="width:300px" type="textarea"/>
+      </el-form-item>
+    </div>
   </el-form>
 
   <el-form label-width="100px">
-    <el-form-item label="病史" required>
-      <el-input v-model="data.medicalHistory" autosize placeholder="病史" type="textarea"/>
-    </el-form-item>
+
 
     <el-form-item label-width="0">
       <my-button text="提交" @click="submit"/>
@@ -128,7 +131,7 @@ export default {
   components: {MyButton},
   data() {
     return {
-      data: {},
+      data: copyObj(defaultData),
     }
   },
   emits: ["submit"],
@@ -154,7 +157,7 @@ export default {
     }
   },
   mounted() {
-    this.sync(this.importData)
+    console.log(1)
   },
   watch: {
     "importData": {
